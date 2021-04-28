@@ -16,6 +16,8 @@ import org.eclipse.keyple.core.plugin.PluginApiProperties;
 import org.eclipse.keyple.core.plugin.spi.PluginFactorySpi;
 import org.eclipse.keyple.core.plugin.spi.PluginSpi;
 
+import java.util.Set;
+
 /**
  * (package-private)<br>
  * Factory of {@link StubPlugin}.
@@ -31,14 +33,15 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    * @since 2.0
    */
   static final String PLUGIN_NAME = "StubPlugin";
-
+  Set<StubReaderConfiguration> readerConfigurations;
   /**
    * (package-private)<br>
    * Creates an instance, sets the fields from the factory builder.
    *
    * @since 2.0
    */
-  StubPluginFactoryAdapter() {
+  StubPluginFactoryAdapter(Set<StubReaderConfiguration> readerConfigurations) {
+    this.readerConfigurations = readerConfigurations;
   }
 
   /**
@@ -78,6 +81,6 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    */
   @Override
   public PluginSpi getPlugin() {
-    return StubPluginWinAdapter.getInstance();
+    return new StubPluginAdapter(PLUGIN_NAME, readerConfigurations);
   }
 }

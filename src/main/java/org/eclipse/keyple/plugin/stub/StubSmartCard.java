@@ -11,43 +11,58 @@
  ************************************************************************************** */
 package org.eclipse.keyple.plugin.stub;
 
+import org.eclipse.keyple.core.plugin.CardIOException;
 import org.eclipse.keyple.core.util.ByteArrayUtil;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
-public abstract class StubSmartCard {
+/**
+ * Simulated smart card that can be inserted into a {@link StubReader}. Register apdu responses with the method {@link #addHexCommand(String, String)}  
+ */
+public class StubSmartCard {
+
+  protected byte[] atr;
+  protected String cardProtocol;
+  protected boolean isPhysicalChannelOpen = false;
+  protected Map<String, String> hexCommands = new ConcurrentHashMap<String, String>();
+
+  /**
+   * Create a simulated smart card with mandatory parameters
+   * @param atr (non nullable) atr of the card
+   * @param cardProtocol (non nullable) card protocol
+   */
+  public StubSmartCard(byte[] atr, String cardProtocol){
+    this.atr = atr;
+    this.cardProtocol = cardProtocol;
+  };
+
+
+  /**
+   * Gets the card protocol supported by the card
+   * @return A not empty String.
+   */
+  public String getCardProtocol(){return cardProtocol;};
 
   /**
    * Getter for ATR
-   *
    * @return Secured Element ATR
    */
-  public abstract byte[] getATR();
-
-  boolean isPhysicalChannelOpen = false;
+  public byte[] getATR(){return atr;};
 
   public boolean isPhysicalChannelOpen() {
     return isPhysicalChannelOpen;
   }
 
   public void openPhysicalChannel() {
-    isPhysicalChannelOpen = true;
+    this.isPhysicalChannelOpen = true;
   }
 
   public void closePhysicalChannel() {
-    isPhysicalChannelOpen = false;
+    this.isPhysicalChannelOpen = false;
   }
 
-  /**
-   * Gets the card protocol supported by the card
-   *
-   * @return A not empty String.
-   */
-  public abstract String getCardProtocol();
-
-  Map<String, String> hexCommands = new ConcurrentHashMap<String, String>();
 
   /**
    * Add more simulated commands to the card Stub
@@ -80,9 +95,8 @@ public abstract class StubSmartCard {
    *
    * @param apduIn commands to be processed
    * @return APDU response
-   * @throws KeypleReaderIOException if the communication with the reader or the card has failed
    */
-  public byte[] processApdu(byte[] apduIn) {
+  public byte[] processApdu(byte[] apduIn) throws CardIOException {
 
     if (apduIn == null) {
       return null;
@@ -100,7 +114,7 @@ public abstract class StubSmartCard {
       }
     }
 
-    // throw a KeypleReaderIOException if not found
-    throw new KeypleReaderIOException("No response available for this request: " + hexApdu);
+    // throw a CardIOException if not found
+    throw new CardIOException("No response available for this request: " + hexApdu);
   }
 }

@@ -13,8 +13,7 @@ package org.eclipse.keyple.plugin.stub;
 
 import org.eclipse.keyple.core.util.Assert;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Builds instances of {@link StubPluginFactory}.
@@ -42,13 +41,27 @@ public final class StubPluginFactoryBuilder {
   public static class Builder {
 
     private final Map<String, String> protocolRulesMap;
+    private final Set<StubReaderConfiguration> readerConfigurations;
 
     /**
-     * (private) Constructs an empty Builder. The default value of all strings is null, the default
-     * value of the map is an empty map.
+     * (private) Constructs an empty Builder.
      */
     private Builder() {
       protocolRulesMap = new HashMap<String, String>();
+      readerConfigurations = new HashSet<>();
+    }
+
+    /**
+     * Initialize the plugin with a stub reader. Multiple readers can be added. The reader can contain a smart card. Readers name should be unique.
+     * @param name name for the initially inserted reader (not nullable and unique)
+     * @param isContactLess true if the created reader should be contactless, false if not.
+     * @param card (optional) inserted smart card
+     * @return instance of the builder
+     */
+    public Builder withStubReader(String name, boolean isContactLess, StubSmartCard card){
+      Assert.getInstance().notNull(name, "Stub Reader name");
+      readerConfigurations.add(new StubReaderConfiguration(name, isContactLess, card));
+      return this;
     }
 
     /**
@@ -58,7 +71,8 @@ public final class StubPluginFactoryBuilder {
      * @since 2.0
      */
     public StubPluginFactory build() {
-      return new StubPluginFactoryAdapter();
+      return new StubPluginFactoryAdapter(readerConfigurations);
     }
   }
+
 }

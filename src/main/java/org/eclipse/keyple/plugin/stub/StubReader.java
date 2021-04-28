@@ -14,9 +14,9 @@ package org.eclipse.keyple.plugin.stub;
 public interface StubReader {
 
   /**
-   * Insert a card Stub into the reader. Will raise a CARD_INSERTED event.
+   * Insert a stub card into the reader. Will raise a CARD_INSERTED event.
    *
-   * @param smartCard stub card to be inserted in the reader
+   * @param smartCard stub card to be inserted in the reader (not nullable)
    * @since 1.0
    */
   void insertCard(StubSmartCard smartCard);
@@ -31,7 +31,7 @@ public interface StubReader {
   /**
    * Get inserted card
    *
-   * @return instance of a card, can be null if no card inserted
+   * @return instance of a {@link StubSmartCard}, can be null if no card inserted
    * @since 1.0
    */
   StubSmartCard getSmartcard();
