@@ -11,20 +11,21 @@
  ************************************************************************************** */
 package org.eclipse.keyple.plugin.stub;
 
+/** The Stub Reader supports programmatically the insertion and removal of {@link StubSmartCard} */
 public interface StubReader {
 
   /**
    * Insert a stub card into the reader. Will raise a CARD_INSERTED event.
    *
    * @param smartCard stub card to be inserted in the reader (not nullable)
-   * @since 1.0
+   * @since 2.0
    */
   void insertCard(StubSmartCard smartCard);
 
   /**
    * Remove card from reader if any
    *
-   * @since 1.0
+   * @since 2.0
    */
   void removeCard();
 
@@ -32,7 +33,7 @@ public interface StubReader {
    * Get inserted card
    *
    * @return instance of a {@link StubSmartCard}, can be null if no card inserted
-   * @since 1.0
+   * @since 2.0
    */
   StubSmartCard getSmartcard();
 }

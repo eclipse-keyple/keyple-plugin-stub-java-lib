@@ -11,12 +11,12 @@
  ************************************************************************************** */
 package org.eclipse.keyple.plugin.stub;
 
-import org.eclipse.keyple.core.util.Assert;
-
 import java.util.*;
+import org.eclipse.keyple.core.util.Assert;
 
 /**
  * Builds instances of {@link StubPluginFactory}.
+ *
  * @since 2.0
  */
 public final class StubPluginFactoryBuilder {
@@ -42,25 +42,40 @@ public final class StubPluginFactoryBuilder {
 
     private final Map<String, String> protocolRulesMap;
     private final Set<StubReaderConfiguration> readerConfigurations;
+    private int monitoringCycleDuration;
 
-    /**
-     * (private) Constructs an empty Builder.
-     */
+    /** (private) Constructs an empty Builder. */
     private Builder() {
       protocolRulesMap = new HashMap<String, String>();
-      readerConfigurations = new HashSet<>();
+      readerConfigurations = new HashSet<StubReaderConfiguration>();
+      monitoringCycleDuration = 0;
     }
 
     /**
-     * Initialize the plugin with a stub reader. Multiple readers can be added. The reader can contain a smart card. Readers name should be unique.
+     * Initialize the plugin with a stub reader. Multiple readers can be added. The reader can
+     * contain a smart card. Readers name should be unique.
+     *
      * @param name name for the initially inserted reader (not nullable and unique)
      * @param isContactLess true if the created reader should be contactless, false if not.
      * @param card (optional) inserted smart card
      * @return instance of the builder
+     * @since 2.0
      */
-    public Builder withStubReader(String name, boolean isContactLess, StubSmartCard card){
+    public Builder withStubReader(String name, boolean isContactLess, StubSmartCard card) {
       Assert.getInstance().notNull(name, "Stub Reader name");
       readerConfigurations.add(new StubReaderConfiguration(name, isContactLess, card));
+      return this;
+    }
+
+    /**
+     * Configure the sleep time between two cycles for card and reader monitoring
+     *
+     * @param duration in milliseconds, default value : 0
+     * @return instance of the builder
+     * @since 2.0
+     */
+    public Builder withMonitoringCycleDuration(int duration) {
+      this.monitoringCycleDuration = duration;
       return this;
     }
 
@@ -71,8 +86,7 @@ public final class StubPluginFactoryBuilder {
      * @since 2.0
      */
     public StubPluginFactory build() {
-      return new StubPluginFactoryAdapter(readerConfigurations);
+      return new StubPluginFactoryAdapter(readerConfigurations, monitoringCycleDuration);
     }
   }
-
 }

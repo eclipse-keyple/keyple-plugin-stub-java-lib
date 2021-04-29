@@ -14,8 +14,8 @@ package org.eclipse.keyple.plugin.stub;
 import org.eclipse.keyple.core.common.KeyplePluginExtensionFactory;
 
 /**
- * Stub specific {@link KeyplePluginExtensionFactory} to be provided to the Keyple SmartCard
- * service to register the Stub plugin, built by {@link StubPluginFactoryBuilder}.
+ * Stub specific {@link KeyplePluginExtensionFactory} to be provided to the Keyple SmartCard service
+ * to register the Stub plugin, built by {@link StubPluginFactoryBuilder}.
  *
  * @since 2.0
  */

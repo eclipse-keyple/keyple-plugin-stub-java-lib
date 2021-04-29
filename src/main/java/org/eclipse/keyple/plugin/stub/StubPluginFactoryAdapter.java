@@ -11,12 +11,13 @@
  ************************************************************************************** */
 package org.eclipse.keyple.plugin.stub;
 
+import static org.eclipse.keyple.plugin.stub.StubPlugin.PLUGIN_NAME;
+
+import java.util.Set;
 import org.eclipse.keyple.core.common.CommonsApiProperties;
 import org.eclipse.keyple.core.plugin.PluginApiProperties;
 import org.eclipse.keyple.core.plugin.spi.PluginFactorySpi;
 import org.eclipse.keyple.core.plugin.spi.PluginSpi;
-
-import java.util.Set;
 
 /**
  * (package-private)<br>
@@ -26,22 +27,19 @@ import java.util.Set;
  */
 final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactorySpi {
 
-  /**
-   * (package-private)<br>
-   * The plugin name
-   *
-   * @since 2.0
-   */
-  static final String PLUGIN_NAME = "StubPlugin";
-  Set<StubReaderConfiguration> readerConfigurations;
+  final Set<StubReaderConfiguration> readerConfigurations;
+  final int monitoringCycleDuration;
+
   /**
    * (package-private)<br>
    * Creates an instance, sets the fields from the factory builder.
    *
    * @since 2.0
    */
-  StubPluginFactoryAdapter(Set<StubReaderConfiguration> readerConfigurations) {
+  StubPluginFactoryAdapter(
+      Set<StubReaderConfiguration> readerConfigurations, int monitoringCycleDuration) {
     this.readerConfigurations = readerConfigurations;
+    this.monitoringCycleDuration = monitoringCycleDuration;
   }
 
   /**
@@ -81,6 +79,6 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    */
   @Override
   public PluginSpi getPlugin() {
-    return new StubPluginAdapter(PLUGIN_NAME, readerConfigurations);
+    return new StubPluginAdapter(PLUGIN_NAME, readerConfigurations, monitoringCycleDuration);
   }
 }

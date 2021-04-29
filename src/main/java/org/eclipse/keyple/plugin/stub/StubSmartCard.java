@@ -11,83 +11,109 @@
  ************************************************************************************** */
 package org.eclipse.keyple.plugin.stub;
 
-import org.eclipse.keyple.core.plugin.CardIOException;
-import org.eclipse.keyple.core.util.ByteArrayUtil;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
+import org.eclipse.keyple.core.plugin.CardIOException;
+import org.eclipse.keyple.core.util.Assert;
+import org.eclipse.keyple.core.util.ByteArrayUtil;
 
 /**
- * Simulated smart card that can be inserted into a {@link StubReader}. Register apdu responses with the method {@link #addHexCommand(String, String)}  
+ * Simulated smart card that can be inserted into a {@link StubReader}. Register apdu responses with
+ * the method {@link #addHexCommand(String, String)}
  */
 public class StubSmartCard {
 
-  protected byte[] atr;
-  protected String cardProtocol;
-  protected boolean isPhysicalChannelOpen = false;
-  protected Map<String, String> hexCommands = new ConcurrentHashMap<String, String>();
+  private final byte[] atr;
+  private final String cardProtocol;
+  private boolean isPhysicalChannelOpen;
+  private final Map<String, String> hexCommands;
 
   /**
    * Create a simulated smart card with mandatory parameters
+   *
    * @param atr (non nullable) atr of the card
    * @param cardProtocol (non nullable) card protocol
    */
-  public StubSmartCard(byte[] atr, String cardProtocol){
+  public StubSmartCard(byte[] atr, String cardProtocol) {
     this.atr = atr;
     this.cardProtocol = cardProtocol;
+    hexCommands = new ConcurrentHashMap<String, String>();
+    isPhysicalChannelOpen = false;
   };
-
 
   /**
    * Gets the card protocol supported by the card
-   * @return A not empty String.
-   */
-  public String getCardProtocol(){return cardProtocol;};
-
-  /**
-   * Getter for ATR
-   * @return Secured Element ATR
-   */
-  public byte[] getATR(){return atr;};
-
-  public boolean isPhysicalChannelOpen() {
-    return isPhysicalChannelOpen;
-  }
-
-  public void openPhysicalChannel() {
-    this.isPhysicalChannelOpen = true;
-  }
-
-  public void closePhysicalChannel() {
-    this.isPhysicalChannelOpen = false;
-  }
-
-
-  /**
-   * Add more simulated commands to the card Stub
    *
-   * @param command hexadecimal command to react to
-   * @param response hexadecimal response to be sent in reaction to command
+   * @return A not empty String.
+   * @since 2.0
    */
-  public void addHexCommand(String command, String response) {
-    if (command == null || response == null) {
-      throw new IllegalArgumentException("Command and Response should not be null");
-    }
+  String getCardProtocol() {
+    return cardProtocol;
+  };
+
+  /**
+   * Get the card ATR
+   *
+   * @return Secured Element ATR
+   * @since 2.0
+   */
+  byte[] getATR() {
+    return atr;
+  };
+
+  /**
+   * Add simulated commands to the card Stub. A command can be a regexp to match multiple apdu.
+   *
+   * @param command hexadecimal command to react to, can be a regexp
+   * @param response hexadecimal response to be sent in reaction to command
+   * @since 2.0
+   */
+  public StubSmartCard addHexCommand(String command, String response) {
+    Assert.getInstance().notNull(command, "command").notNull(response, "response");
     // add commands without space
-    hexCommands.put(command.replace(" ", ""), response.replace(" ", ""));
+    hexCommands.put(command.trim(), response.trim());
+    return this;
   }
 
   /**
    * Remove simulated commands from the card Stub
    *
    * @param command hexadecimal command to be removed
+   * @since 2.0
    */
-  public void removeHexCommand(String command) {
-    if (command == null) {
-      throw new IllegalArgumentException("Command should not be null");
-    }
+  public StubSmartCard removeHexCommand(String command) {
+    Assert.getInstance().notNull(command, "command");
     hexCommands.remove(command.trim());
+    return this;
+  }
+
+  /**
+   * Get the status of the physical channel
+   *
+   * @return true if the physical channel is open
+   * @since 2.0
+   */
+  boolean isPhysicalChannelOpen() {
+    return isPhysicalChannelOpen;
+  }
+
+  /**
+   * Open the physical channel of the card
+   *
+   * @since 2.0
+   */
+  void openPhysicalChannel() {
+    this.isPhysicalChannelOpen = true;
+  }
+
+  /**
+   * Close the physical channel of the card
+   *
+   * @since 2.0
+   */
+  void closePhysicalChannel() {
+    this.isPhysicalChannelOpen = false;
   }
 
   /**
@@ -95,8 +121,9 @@ public class StubSmartCard {
    *
    * @param apduIn commands to be processed
    * @return APDU response
+   * @since 2.0
    */
-  public byte[] processApdu(byte[] apduIn) throws CardIOException {
+  byte[] processApdu(byte[] apduIn) throws CardIOException {
 
     if (apduIn == null) {
       return null;
