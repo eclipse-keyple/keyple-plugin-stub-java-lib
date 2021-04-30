@@ -41,13 +41,13 @@ public final class StubPluginFactoryBuilder {
   public static class Builder {
 
     private final Map<String, String> protocolRulesMap;
-    private final Set<StubReaderConfiguration> readerConfigurations;
+    private final Set<StubPluginFactoryAdapter.StubReaderConfiguration> readerConfigurations;
     private int monitoringCycleDuration;
 
     /** (private) Constructs an empty Builder. */
     private Builder() {
       protocolRulesMap = new HashMap<String, String>();
-      readerConfigurations = new HashSet<StubReaderConfiguration>();
+      readerConfigurations = new HashSet<StubPluginFactoryAdapter.StubReaderConfiguration>();
       monitoringCycleDuration = 0;
     }
 
@@ -63,7 +63,8 @@ public final class StubPluginFactoryBuilder {
      */
     public Builder withStubReader(String name, boolean isContactLess, StubSmartCard card) {
       Assert.getInstance().notNull(name, "Stub Reader name");
-      readerConfigurations.add(new StubReaderConfiguration(name, isContactLess, card));
+      readerConfigurations.add(
+          new StubPluginFactoryAdapter.StubReaderConfiguration(name, isContactLess, card));
       return this;
     }
 

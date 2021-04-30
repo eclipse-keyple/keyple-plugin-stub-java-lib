@@ -15,7 +15,10 @@ package org.eclipse.keyple.plugin.stub;
 public interface StubReader {
 
   /**
-   * Insert a stub card into the reader. Will raise a CARD_INSERTED event.
+   * Insert a stub card into the reader. The card is taken into account by the reader only if its
+   * protocol has been activated previously by the method {@link
+   * org.eclipse.keyple.core.plugin.spi.reader.ReaderSpi#activateProtocol(String)} In such case it
+   * raises a CARD_INSERTED event.
    *
    * @param smartCard stub card to be inserted in the reader (not nullable)
    * @since 2.0

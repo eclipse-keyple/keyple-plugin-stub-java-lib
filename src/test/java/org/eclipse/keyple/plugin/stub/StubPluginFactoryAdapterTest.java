@@ -12,8 +12,10 @@
 package org.eclipse.keyple.plugin.stub;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.eclipse.keyple.plugin.stub.StubSmartCardTest.getCard;
+import static org.eclipse.keyple.plugin.stub.StubSmartCardTest.buildACard;
 
+import org.eclipse.keyple.core.common.CommonsApiProperties;
+import org.eclipse.keyple.core.plugin.PluginApiProperties;
 import org.eclipse.keyple.core.plugin.PluginIOException;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,23 +25,30 @@ public class StubPluginFactoryAdapterTest {
   StubPluginFactoryAdapter factory;
   StubSmartCard card;
   String READER_NAME = "test";
+  int monitoringCycle = 100;
 
   @Before
   public void setup() {
-    card = getCard();
+    card = buildACard();
   }
 
   @Test
   public void init_factory_with_reader_configuration() throws PluginIOException {
+
     factory =
         (StubPluginFactoryAdapter)
             StubPluginFactoryBuilder.builder()
                 .withStubReader(READER_NAME, true, card)
-                .withMonitoringCycleDuration(100)
+                .withMonitoringCycleDuration(monitoringCycle)
                 .build();
+
+    assertThat(factory.getPluginApiVersion()).isEqualTo(PluginApiProperties.VERSION);
+    assertThat(factory.getCommonsApiVersion()).isEqualTo(CommonsApiProperties.VERSION);
 
     StubPluginAdapter stubPlugin = (StubPluginAdapter) factory.getPlugin();
     assertThat(stubPlugin).isNotNull();
+    assertThat(stubPlugin.getName()).isEqualTo(StubPlugin.PLUGIN_NAME);
+    assertThat(stubPlugin.getMonitoringCycleDuration()).isEqualTo(monitoringCycle);
     assertThat(stubPlugin.searchAvailableReaders().size()).isEqualTo(1);
 
     StubReaderAdapter reader = (StubReaderAdapter) stubPlugin.searchReader(READER_NAME);

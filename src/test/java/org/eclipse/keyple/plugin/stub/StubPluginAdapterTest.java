@@ -12,7 +12,8 @@
 package org.eclipse.keyple.plugin.stub;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.eclipse.keyple.plugin.stub.StubSmartCardTest.getCard;
+import static org.eclipse.keyple.plugin.stub.StubPluginFactoryAdapter.*;
+import static org.eclipse.keyple.plugin.stub.StubSmartCardTest.buildACard;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -26,13 +27,13 @@ public class StubPluginAdapterTest {
   private StubPluginAdapter pluginAdapter;
   private StubSmartCard card;
   private final String NAME = "name";
-  private Set<StubReaderConfiguration> readerConfigurations;
+  private Set<StubReaderConfiguration> readerConfigurations =
+      new HashSet<StubReaderConfiguration>();
 
   @Before
   public void setup() {
-    readerConfigurations = new HashSet<StubReaderConfiguration>();
     pluginAdapter = new StubPluginAdapter(NAME, readerConfigurations, 0);
-    card = getCard();
+    card = buildACard();
   }
 
   @Test

@@ -28,7 +28,7 @@ final class StubReaderAdapter
 
   private final String name;
   private final Boolean isContactLess;
-  private final Set<String> readerProtocols;
+  private final Set<String> activatedProtocols;
 
   private StubSmartCard smartCard;
 
@@ -42,7 +42,7 @@ final class StubReaderAdapter
   StubReaderAdapter(String name, Boolean isContactLess, StubSmartCard card) {
     this.name = name;
     this.isContactLess = isContactLess;
-    this.readerProtocols = new HashSet<String>();
+    this.activatedProtocols = new HashSet<String>();
     this.smartCard = card;
   }
 
@@ -94,7 +94,7 @@ final class StubReaderAdapter
    */
   @Override
   public void activateProtocol(String readerProtocol) {
-    readerProtocols.add(readerProtocol);
+    activatedProtocols.add(readerProtocol);
   }
   /**
    * {@inheritDoc}
@@ -103,7 +103,7 @@ final class StubReaderAdapter
    */
   @Override
   public void deactivateProtocol(String readerProtocol) {
-    readerProtocols.remove(readerProtocol);
+    activatedProtocols.remove(readerProtocol);
   }
   /**
    * {@inheritDoc}
@@ -209,12 +209,22 @@ final class StubReaderAdapter
   @Override
   public void insertCard(StubSmartCard smartCard) {
     Assert.getInstance().notNull(smartCard, "smart card");
-    if (logger.isTraceEnabled()) logger.trace("Insert card {}", smartCard);
-
-    /* clean channels status */
-    if (isPhysicalChannelOpen()) {
-      closePhysicalChannel();
+    if (checkCardPresence()) {
+      logger.warn("You must remove the inserted card before inserted another one");
+      return;
     }
+
+    if (!activatedProtocols.contains(smartCard.getCardProtocol())) {
+      if (logger.isTraceEnabled()) {
+        logger.trace(
+            "Inserted card protocol {} does not match any activated protocol, please use activateProtocol() method",
+            smartCard.getCardProtocol());
+      }
+      return;
+    }
+
+    if (logger.isTraceEnabled()) logger.trace("Inserted card {}", smartCard);
+
     this.smartCard = smartCard;
   }
   /**

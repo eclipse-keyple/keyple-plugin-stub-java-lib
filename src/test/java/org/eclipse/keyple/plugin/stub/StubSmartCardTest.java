@@ -29,33 +29,29 @@ public class StubSmartCardTest {
 
   @Before
   public void setup() {
-    card = new StubSmartCard(atr, protocol);
+    card = buildACard();
   }
 
   @Test
   public void sendApdu_adpuExists_sendResponse() throws CardIOException {
-    card.addHexCommand(commandHex, responseHex);
     byte[] apduResponse = card.processApdu(ByteArrayUtil.fromHex(commandHex));
     assertThat(apduResponse).isEqualTo(ByteArrayUtil.fromHex(responseHex));
   }
 
   @Test
   public void sendApdu_adpuRegexpExists_sendResponse() throws CardIOException {
-    card.addHexCommand(commandHexRegexp, responseHex);
+    card =
+        StubSmartCard.builder()
+            .withAtr(atr)
+            .withProcotol(protocol)
+            .withHexCommands(commandHexRegexp, responseHex)
+            .build();
     byte[] apduResponse = card.processApdu(ByteArrayUtil.fromHex(commandHex));
     assertThat(apduResponse).isEqualTo(ByteArrayUtil.fromHex(responseHex));
   }
 
   @Test(expected = CardIOException.class)
   public void sendApdu_adpuNotExists_sendException() throws CardIOException {
-    card.addHexCommand(commandHex, responseHex);
-    card.processApdu(ByteArrayUtil.fromHex("excp"));
-  }
-
-  @Test(expected = CardIOException.class)
-  public void removeApdu_sendApudu_sendException() throws CardIOException {
-    card.addHexCommand(commandHex, responseHex);
-    card.removeHexCommand(commandHex);
     card.processApdu(ByteArrayUtil.fromHex("excp"));
   }
 
@@ -68,7 +64,11 @@ public class StubSmartCardTest {
     assertThat(card.isPhysicalChannelOpen()).isFalse();
   }
 
-  static StubSmartCard getCard() {
-    return new StubSmartCard(atr, protocol).addHexCommand(commandHex, responseHex);
+  static StubSmartCard buildACard() {
+    return StubSmartCard.builder()
+        .withAtr(atr)
+        .withProcotol(protocol)
+        .withHexCommands(commandHex, responseHex)
+        .build();
   }
 }
