@@ -40,13 +40,11 @@ public final class StubPluginFactoryBuilder {
    */
   public static class Builder {
 
-    private final Map<String, String> protocolRulesMap;
     private final Set<StubPluginFactoryAdapter.StubReaderConfiguration> readerConfigurations;
     private int monitoringCycleDuration;
 
     /** (private) Constructs an empty Builder. */
     private Builder() {
-      protocolRulesMap = new HashMap<String, String>();
       readerConfigurations = new HashSet<StubPluginFactoryAdapter.StubReaderConfiguration>();
       monitoringCycleDuration = 0;
     }
