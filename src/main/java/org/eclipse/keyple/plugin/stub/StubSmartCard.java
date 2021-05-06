@@ -41,7 +41,7 @@ public class StubSmartCard {
     this.cardProtocol = cardProtocol;
     this.hexCommands = hexCommands;
     isPhysicalChannelOpen = false;
-  };
+  }
 
   /**
    * Gets the card protocol supported by the card
@@ -51,7 +51,7 @@ public class StubSmartCard {
    */
   String getCardProtocol() {
     return cardProtocol;
-  };
+  }
 
   /**
    * Get the card ATR
