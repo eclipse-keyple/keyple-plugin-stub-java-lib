@@ -44,7 +44,7 @@ public class StubSmartCardTest {
         StubSmartCard.builder()
             .withAtr(atr)
             .withProcotol(protocol)
-            .withHexCommands(commandHexRegexp, responseHex)
+            .withSimulatedCommand(commandHexRegexp, responseHex)
             .build();
     byte[] apduResponse = card.processApdu(ByteArrayUtil.fromHex(commandHex));
     assertThat(apduResponse).isEqualTo(ByteArrayUtil.fromHex(responseHex));
@@ -68,7 +68,7 @@ public class StubSmartCardTest {
     return StubSmartCard.builder()
         .withAtr(atr)
         .withProcotol(protocol)
-        .withHexCommands(commandHex, responseHex)
+        .withSimulatedCommand(commandHex, responseHex)
         .build();
   }
 }

@@ -104,7 +104,7 @@ public class StubReaderAdapterTest {
     return StubSmartCard.builder()
         .withAtr(ByteArrayUtil.fromHex("0000"))
         .withProcotol(protocol)
-        .withHexCommands(commandHex, responseHex)
+        .withSimulatedCommand(commandHex, responseHex)
         .build();
   }
 }

@@ -61,7 +61,7 @@ public class StubSmartCard {
    */
   byte[] getATR() {
     return atr;
-  };
+  }
 
   /**
    * Get the status of the physical channel
@@ -135,6 +135,12 @@ public class StubSmartCard {
         + '}';
   }
 
+  /**
+   * Creates a builder for the {@link StubSmartCard}
+   *
+   * @return next step of the buider
+   * @since 2.0
+   */
   public static AtrStep builder() {
     return new Builder();
   }
@@ -154,7 +160,7 @@ public class StubSmartCard {
     }
 
     @Override
-    public Builder withHexCommands(String command, String response) {
+    public Builder withSimulatedCommand(String command, String response) {
       Assert.getInstance().notNull(command, "command").notNull(response, "response");
       // add commands without space
       hexCommands.put(command.trim(), response.trim());
@@ -182,7 +188,7 @@ public class StubSmartCard {
 
   interface AtrStep {
     /**
-     * Define Atr for the {@link StubSmartCard} to build
+     * Define simulated Atr for the {@link StubSmartCard} to build
      *
      * @param atr (not nullable) byte of array
      * @return next step of builder
@@ -193,7 +199,7 @@ public class StubSmartCard {
 
   interface ProtocolStep {
     /**
-     * Define protocol for the {@link StubSmartCard} to build
+     * Define simulated protocol for the {@link StubSmartCard} to build
      *
      * @param protocol (not nullable) protocol name
      * @return next step of builder
@@ -204,14 +210,15 @@ public class StubSmartCard {
 
   interface CommandStep {
     /**
-     * Add simulated command/response for the {@link StubSmartCard} to build
+     * Add simulated command/response to the {@link StubSmartCard} to build. Command and response
+     * should be hexadecimal.
      *
      * @param command hexadecimal command to respond to (can be a regexp to match multiple apdu)
      * @param response hexadecimal response
      * @return next step of builder
      * @since 2.0
      */
-    CommandStep withHexCommands(String command, String response);
+    CommandStep withSimulatedCommand(String command, String response);
 
     /**
      * Build the {@link StubSmartCard}
