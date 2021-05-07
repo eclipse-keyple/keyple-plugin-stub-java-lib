@@ -21,6 +21,13 @@ import org.eclipse.keyple.core.util.Assert;
  */
 public final class StubPluginFactoryBuilder {
 
+  /**
+   * The plugin default name
+   *
+   * @since 2.0
+   */
+  public static String PLUGIN_NAME = "StubPlugin";
+
   private StubPluginFactoryBuilder() {}
 
   /**
@@ -85,7 +92,8 @@ public final class StubPluginFactoryBuilder {
      * @since 2.0
      */
     public StubPluginFactory build() {
-      return new StubPluginFactoryAdapter(readerConfigurations, monitoringCycleDuration);
+      return new StubPluginFactoryAdapter(
+          PLUGIN_NAME, readerConfigurations, monitoringCycleDuration);
     }
   }
 }

@@ -16,13 +16,24 @@ import java.util.Set;
 import org.eclipse.keyple.core.plugin.CardIOException;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.ObservableReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.insertion.WaitForCardInsertionNonBlockingSpi;
+import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.DontWaitForCardRemovalDuringProcessingSpi;
+import org.eclipse.keyple.core.plugin.spi.reader.observable.state.removal.WaitForCardRemovalNonBlockingSpi;
 import org.eclipse.keyple.core.util.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** The adapter for the StubReader is also an ObservableReaderSpi */
+/**
+ * (package-private)<br>
+ * The adapter for the StubReader is also an ObservableReaderSpi
+ *
+ * @since 2.0
+ */
 final class StubReaderAdapter
-    implements StubReader, ObservableReaderSpi, WaitForCardInsertionNonBlockingSpi {
+    implements StubReader,
+        ObservableReaderSpi,
+        WaitForCardInsertionNonBlockingSpi,
+        DontWaitForCardRemovalDuringProcessingSpi,
+        WaitForCardRemovalNonBlockingSpi {
 
   private static final Logger logger = LoggerFactory.getLogger(StubReaderAdapter.class);
 
@@ -33,11 +44,13 @@ final class StubReaderAdapter
   private StubSmartCard smartCard;
 
   /**
-   * (package-private) constructor
+   * (package-private)<br>
+   * constructor
    *
    * @param name name of the reader
    * @param isContactLess true if contactless
    * @param card (optionnal) inserted smart card at creation
+   * @since 2.0
    */
   StubReaderAdapter(String name, Boolean isContactLess, StubSmartCard card) {
     this.name = name;
@@ -49,6 +62,7 @@ final class StubReaderAdapter
   /*
    * ObservableReaderSpi
    */
+
   /**
    * {@inheritDoc}
    *

@@ -14,18 +14,12 @@ package org.eclipse.keyple.plugin.stub;
 import org.eclipse.keyple.core.common.KeyplePluginExtension;
 
 /**
- * Specific methods of the Stub Plugin. Implemented as a {@link KeyplePluginExtension}.
+ * Specific methods of the Stub Plugin. Implemented as a {@link KeyplePluginExtension}. To invoke
+ * those methods use Plugin#getExtension(StubPlugin.class) from the Plugin class.
  *
  * @since 2.0
  */
 public interface StubPlugin extends KeyplePluginExtension {
-
-  /**
-   * The plugin default name
-   *
-   * @since 2.0
-   */
-  String PLUGIN_NAME = "StubPlugin";
 
   /**
    * Plug a new {@link StubReader}. This operation is asynchronous and will raise a READER_CONNECTED

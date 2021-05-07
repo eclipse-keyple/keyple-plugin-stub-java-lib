@@ -11,8 +11,16 @@
  ************************************************************************************** */
 package org.eclipse.keyple.plugin.stub;
 
-/** The Stub Reader supports programmatically the insertion and removal of {@link StubSmartCard} */
-public interface StubReader {
+import org.eclipse.keyple.core.common.KeypleReaderExtension;
+
+/**
+ * The Stub Reader supports programmatically the insertion and removal of {@link StubSmartCard} <br>
+ * To invoke those methods use Reader#getExtension(StubReader.class) from the Reader
+ * class.
+ *
+ * @since 2.0
+ */
+public interface StubReader extends KeypleReaderExtension {
 
   /**
    * Insert a stub card into the reader. The card is taken into account by the reader only if its

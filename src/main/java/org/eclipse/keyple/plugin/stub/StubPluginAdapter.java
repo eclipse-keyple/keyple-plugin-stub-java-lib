@@ -13,16 +13,21 @@ package org.eclipse.keyple.plugin.stub;
 
 import static org.eclipse.keyple.plugin.stub.StubPluginFactoryAdapter.*;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.keyple.core.plugin.PluginIOException;
 import org.eclipse.keyple.core.plugin.spi.ObservablePluginSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.ReaderSpi;
 import org.eclipse.keyple.core.util.Assert;
 
-/** Internal adapter of the {@link StubPlugin} */
+/**
+ * (package-private)<br>
+ * Internal adapter of the {@link StubPlugin}
+ *
+ * @since 2.0
+ */
 class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
 
   private final String name;
@@ -35,12 +40,13 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @param name name of the plugin
    * @param readerConfigurations configuraitons of the reader to plug initially
    * @param monitoringCycleDuration duration between two monitoring cycle
+   * @since 2.0
    */
   StubPluginAdapter(
       String name, Set<StubReaderConfiguration> readerConfigurations, int monitoringCycleDuration) {
     this.name = name;
     this.monitoringCycleDuration = monitoringCycleDuration;
-    this.stubReaders = new HashMap<String, StubReaderAdapter>();
+    this.stubReaders = new ConcurrentHashMap<String, StubReaderAdapter>();
     for (StubReaderConfiguration configuration : readerConfigurations) {
       this.plugReader(
           configuration.getName(), configuration.getContactless(), configuration.getCard());
@@ -62,7 +68,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    */
   @Override
   public Set<String> searchAvailableReadersNames() throws PluginIOException {
-    return stubReaders.keySet();
+    return new HashSet<String>(stubReaders.keySet());
   }
   /**
    * {@inheritDoc}

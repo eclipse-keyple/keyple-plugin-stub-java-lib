@@ -47,7 +47,7 @@ public class StubPluginFactoryAdapterTest {
 
     StubPluginAdapter stubPlugin = (StubPluginAdapter) factory.getPlugin();
     assertThat(stubPlugin).isNotNull();
-    assertThat(stubPlugin.getName()).isEqualTo(StubPlugin.PLUGIN_NAME);
+    assertThat(stubPlugin.getName()).isEqualTo(StubPluginFactoryBuilder.PLUGIN_NAME);
     assertThat(stubPlugin.getMonitoringCycleDuration()).isEqualTo(monitoringCycle);
     assertThat(stubPlugin.searchAvailableReaders().size()).isEqualTo(1);
 

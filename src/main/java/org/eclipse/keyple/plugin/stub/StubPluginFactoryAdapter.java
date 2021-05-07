@@ -11,8 +11,6 @@
  ************************************************************************************** */
 package org.eclipse.keyple.plugin.stub;
 
-import static org.eclipse.keyple.plugin.stub.StubPlugin.PLUGIN_NAME;
-
 import java.util.Set;
 import org.eclipse.keyple.core.common.CommonsApiProperties;
 import org.eclipse.keyple.core.plugin.PluginApiProperties;
@@ -27,17 +25,24 @@ import org.eclipse.keyple.core.plugin.spi.PluginSpi;
  */
 final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactorySpi {
 
-  final Set<StubReaderConfiguration> readerConfigurations;
-  final int monitoringCycleDuration;
+  private final Set<StubReaderConfiguration> readerConfigurations;
+  private final int monitoringCycleDuration;
+  private final String pluginName;
 
   /**
    * (package-private)<br>
    * Creates an instance, sets the fields from the factory builder.
    *
+   * @param pluginName name of the plugin
+   * @param readerConfigurations readerConfigurations to be created at init
+   * @param monitoringCycleDuration duration of each monitoring cycle
    * @since 2.0
    */
   StubPluginFactoryAdapter(
-      Set<StubReaderConfiguration> readerConfigurations, int monitoringCycleDuration) {
+      String pluginName,
+      Set<StubReaderConfiguration> readerConfigurations,
+      int monitoringCycleDuration) {
+    this.pluginName = pluginName;
     this.readerConfigurations = readerConfigurations;
     this.monitoringCycleDuration = monitoringCycleDuration;
   }
@@ -69,7 +74,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    */
   @Override
   public String getPluginName() {
-    return PLUGIN_NAME;
+    return pluginName;
   }
 
   /**
@@ -79,30 +84,65 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    */
   @Override
   public PluginSpi getPlugin() {
-    return new StubPluginAdapter(PLUGIN_NAME, readerConfigurations, monitoringCycleDuration);
+    return new StubPluginAdapter(pluginName, readerConfigurations, monitoringCycleDuration);
   }
 
-  /** (package-private) Internal configuration for an initially plugged stubReader */
+  /**
+   * (package-private)
+   *
+   * <p>Configuration for an initially plugged stubReader
+   *
+   * @since 2.0
+   */
   static class StubReaderConfiguration {
 
     private final String name;
-    private final Boolean isContactless;
+    private final boolean isContactless;
     private final StubSmartCard card;
 
-    StubReaderConfiguration(String name, Boolean isContactless, StubSmartCard card) {
+    /**
+     * (package-private) constructor for a reader configuration
+     *
+     * @param name name of the reader (not nullable)
+     * @param isContactless true if the reader should be contactless (not nullable)
+     * @param card inserted card (nullable)
+     * @since 2.0
+     */
+    StubReaderConfiguration(String name, boolean isContactless, StubSmartCard card) {
       this.name = name;
       this.isContactless = isContactless;
       this.card = card;
     }
 
+    /**
+     * (package-private)<br>
+     * Get the name of the reader
+     *
+     * @return not nullable name
+     * @since 2.0
+     */
     String getName() {
       return name;
     }
 
-    Boolean getContactless() {
+    /**
+     * (package-private)<br>
+     * Should the reader be contacless
+     *
+     * @return not nullable boolean
+     * @since 2.0
+     */
+    boolean getContactless() {
       return isContactless;
     }
 
+    /**
+     * (package-private)<br>
+     * Card inserted in the reader
+     *
+     * @return nullable object
+     * @since 2.0
+     */
     StubSmartCard getCard() {
       return card;
     }

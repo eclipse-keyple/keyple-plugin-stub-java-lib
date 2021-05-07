@@ -21,6 +21,8 @@ import org.eclipse.keyple.core.util.ByteArrayUtil;
 /**
  * Simulated smart card that can be inserted into a {@link StubReader}. Use the {@link Builder} to
  * create this object
+ *
+ * @since 2.0
  */
 public class StubSmartCard {
 
@@ -30,11 +32,13 @@ public class StubSmartCard {
   private final Map<String, String> hexCommands;
 
   /**
-   * (private) Create a simulated smart card with mandatory parameters
+   * (private) <br>
+   * Create a simulated smart card with mandatory parameters
    *
    * @param atr (non nullable) atr of the card
    * @param cardProtocol (non nullable) card protocol
    * @param hexCommands (non nullable) set of simulated commands
+   * @since 2.0
    */
   private StubSmartCard(byte[] atr, String cardProtocol, Map<String, String> hexCommands) {
     this.atr = atr;
@@ -44,6 +48,7 @@ public class StubSmartCard {
   }
 
   /**
+   * (package-private) <br>
    * Gets the card protocol supported by the card
    *
    * @return A not empty String.
@@ -54,6 +59,7 @@ public class StubSmartCard {
   }
 
   /**
+   * (package-private) <br>
    * Get the card ATR
    *
    * @return Secured Element ATR
@@ -64,6 +70,7 @@ public class StubSmartCard {
   }
 
   /**
+   * (package-private) <br>
    * Get the status of the physical channel
    *
    * @return true if the physical channel is open
@@ -74,6 +81,7 @@ public class StubSmartCard {
   }
 
   /**
+   * (package-private) <br>
    * Open the physical channel of the card
    *
    * @since 2.0
@@ -83,6 +91,7 @@ public class StubSmartCard {
   }
 
   /**
+   * (package-private) <br>
    * Close the physical channel of the card
    *
    * @since 2.0
@@ -92,6 +101,7 @@ public class StubSmartCard {
   }
 
   /**
+   * (package-private) <br>
    * Return APDU Response to APDU Request
    *
    * @param apduIn commands to be processed
@@ -120,6 +130,11 @@ public class StubSmartCard {
     throw new CardIOException("No response available for this request: " + hexApdu);
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * @since 2.0
+   */
   @Override
   public String toString() {
     return "StubSmartCard{"
@@ -159,6 +174,11 @@ public class StubSmartCard {
       hexCommands = new HashMap<String, String>();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 2.0
+     */
     @Override
     public Builder withSimulatedCommand(String command, String response) {
       Assert.getInstance().notNull(command, "command").notNull(response, "response");
@@ -167,17 +187,32 @@ public class StubSmartCard {
       return this;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 2.0
+     */
     @Override
     public StubSmartCard build() {
       return new StubSmartCard(atr, cardProtocol, hexCommands);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 2.0
+     */
     @Override
     public ProtocolStep withAtr(byte[] atr) {
       this.atr = atr;
       return this;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @since 2.0
+     */
     @Override
     public Builder withProcotol(String protocol) {
       Assert.getInstance().notNull(protocol, "Protocol");
@@ -186,7 +221,7 @@ public class StubSmartCard {
     }
   }
 
-  interface AtrStep {
+  public interface AtrStep {
     /**
      * Define simulated Atr for the {@link StubSmartCard} to build
      *
@@ -197,7 +232,7 @@ public class StubSmartCard {
     ProtocolStep withAtr(byte[] atr);
   }
 
-  interface ProtocolStep {
+  public interface ProtocolStep {
     /**
      * Define simulated protocol for the {@link StubSmartCard} to build
      *
@@ -208,7 +243,7 @@ public class StubSmartCard {
     CommandStep withProcotol(String protocol);
   }
 
-  interface CommandStep {
+  public interface CommandStep {
     /**
      * Add simulated command/response to the {@link StubSmartCard} to build. Command and response
      * should be hexadecimal.
