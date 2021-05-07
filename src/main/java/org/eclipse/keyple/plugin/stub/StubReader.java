@@ -15,8 +15,7 @@ import org.eclipse.keyple.core.common.KeypleReaderExtension;
 
 /**
  * The Stub Reader supports programmatically the insertion and removal of {@link StubSmartCard} <br>
- * To invoke those methods use Reader#getExtension(StubReader.class) from the Reader
- * class.
+ * To invoke those methods use Reader#getExtension(StubReader.class) from the Reader class.
  *
  * @since 2.0
  */
