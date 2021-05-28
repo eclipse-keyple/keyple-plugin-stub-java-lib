@@ -41,7 +41,7 @@ public class StubPluginAdapterTest {
     readerConfigurations.add(new StubReaderConfiguration(NAME, true, card));
     pluginAdapter = new StubPluginAdapter(NAME, readerConfigurations, 0);
     assertThat(pluginAdapter.searchAvailableReaders().size()).isEqualTo(1);
-    assertThat(pluginAdapter.searchAvailableReadersNames().size()).isEqualTo(1);
+    assertThat(pluginAdapter.searchAvailableReaderNames().size()).isEqualTo(1);
     assertThat(pluginAdapter.searchReader(NAME)).isNotNull();
     assertThat(pluginAdapter.searchReader(NAME).isContactless()).isTrue();
     assertThat(pluginAdapter.searchReader(NAME).checkCardPresence()).isTrue();

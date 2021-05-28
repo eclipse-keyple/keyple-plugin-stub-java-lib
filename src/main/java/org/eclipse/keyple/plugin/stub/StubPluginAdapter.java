@@ -67,7 +67,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @since 2.0
    */
   @Override
-  public Set<String> searchAvailableReadersNames() throws PluginIOException {
+  public Set<String> searchAvailableReaderNames() throws PluginIOException {
     return new HashSet<String>(stubReaders.keySet());
   }
   /**

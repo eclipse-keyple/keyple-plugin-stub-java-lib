@@ -49,7 +49,7 @@ public class StubReaderAdapterTest {
     adapter.activateProtocol(PROTOCOL);
     adapter.insertCard(card);
     assertThat(adapter.getSmartcard()).isEqualTo(card);
-    assertThat(adapter.getAtr()).isEqualTo(card.getATR());
+    assertThat(adapter.getPowerOnData()).isEqualTo(card.getPowerOnData());
     assertThat(adapter.isPhysicalChannelOpen()).isEqualTo(card.isPhysicalChannelOpen());
     assertThat(adapter.checkCardPresence()).isTrue();
     assertThat(adapter.isCurrentProtocol(PROTOCOL)).isTrue();
@@ -102,7 +102,7 @@ public class StubReaderAdapterTest {
 
   private StubSmartCard buildCard(String protocol) {
     return StubSmartCard.builder()
-        .withAtr(ByteArrayUtil.fromHex("0000"))
+        .withPowerOnData(ByteArrayUtil.fromHex("0000"))
         .withProcotol(protocol)
         .withSimulatedCommand(commandHex, responseHex)
         .build();
