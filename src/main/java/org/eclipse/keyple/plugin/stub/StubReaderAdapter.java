@@ -178,8 +178,8 @@ final class StubReaderAdapter
    * @since 2.0
    */
   @Override
-  public byte[] getAtr() {
-    return smartCard.getATR();
+  public byte[] getPowerOnData() {
+    return smartCard.getPowerOnData();
   }
   /**
    * {@inheritDoc}

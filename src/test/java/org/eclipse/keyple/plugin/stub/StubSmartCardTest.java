@@ -21,7 +21,7 @@ import org.junit.Test;
 public class StubSmartCardTest {
 
   static StubSmartCard card;
-  static byte[] atr = new byte[1];
+  static byte[] powerOnData = new byte[1];
   static String protocol = "protocol";
   static String commandHex = "1234567890ABCDEFFEDCBA0987654321";
   static String commandHexRegexp = "1234.*";
@@ -42,7 +42,7 @@ public class StubSmartCardTest {
   public void sendApdu_adpuRegexpExists_sendResponse() throws CardIOException {
     card =
         StubSmartCard.builder()
-            .withAtr(atr)
+            .withPowerOnData(powerOnData)
             .withProcotol(protocol)
             .withSimulatedCommand(commandHexRegexp, responseHex)
             .build();
@@ -66,7 +66,7 @@ public class StubSmartCardTest {
 
   static StubSmartCard buildACard() {
     return StubSmartCard.builder()
-        .withAtr(atr)
+        .withPowerOnData(powerOnData)
         .withProcotol(protocol)
         .withSimulatedCommand(commandHex, responseHex)
         .build();

@@ -26,7 +26,7 @@ import org.eclipse.keyple.core.util.ByteArrayUtil;
  */
 public class StubSmartCard {
 
-  private final byte[] atr;
+  private final byte[] powerOnData;
   private final String cardProtocol;
   private boolean isPhysicalChannelOpen;
   private final Map<String, String> hexCommands;
@@ -35,13 +35,13 @@ public class StubSmartCard {
    * (private) <br>
    * Create a simulated smart card with mandatory parameters
    *
-   * @param atr (non nullable) atr of the card
+   * @param powerOnData (non nullable) power-on data of the card
    * @param cardProtocol (non nullable) card protocol
    * @param hexCommands (non nullable) set of simulated commands
    * @since 2.0
    */
-  private StubSmartCard(byte[] atr, String cardProtocol, Map<String, String> hexCommands) {
-    this.atr = atr;
+  private StubSmartCard(byte[] powerOnData, String cardProtocol, Map<String, String> hexCommands) {
+    this.powerOnData = powerOnData;
     this.cardProtocol = cardProtocol;
     this.hexCommands = hexCommands;
     isPhysicalChannelOpen = false;
@@ -60,20 +60,20 @@ public class StubSmartCard {
 
   /**
    * (package-private) <br>
-   * Get the card ATR
+   * Get the card power-on data
    *
-   * @return Secured Element ATR
+   * @return Null if no power-on data are available.
    * @since 2.0
    */
-  byte[] getATR() {
-    return atr;
+  byte[] getPowerOnData() {
+    return powerOnData;
   }
 
   /**
    * (package-private) <br>
    * Get the status of the physical channel
    *
-   * @return true if the physical channel is open
+   * @return True if the physical channel is open
    * @since 2.0
    */
   boolean isPhysicalChannelOpen() {
@@ -138,8 +138,8 @@ public class StubSmartCard {
   @Override
   public String toString() {
     return "StubSmartCard{"
-        + "atr="
-        + ByteArrayUtil.toHex(atr)
+        + "powerOnData="
+        + ByteArrayUtil.toHex(powerOnData)
         + ", cardProtocol='"
         + cardProtocol
         + '\''
@@ -153,10 +153,10 @@ public class StubSmartCard {
   /**
    * Creates a builder for the {@link StubSmartCard}
    *
-   * @return next step of the buider
+   * @return Next step of the buider
    * @since 2.0
    */
-  public static AtrStep builder() {
+  public static PowerOnDataStep builder() {
     return new Builder();
   }
 
@@ -165,8 +165,8 @@ public class StubSmartCard {
    *
    * @since 2.0
    */
-  public static class Builder implements AtrStep, ProtocolStep, CommandStep {
-    private byte[] atr;
+  public static class Builder implements PowerOnDataStep, ProtocolStep, CommandStep {
+    private byte[] powerOnData;
     private String cardProtocol;
     private Map<String, String> hexCommands;
 
@@ -194,7 +194,7 @@ public class StubSmartCard {
      */
     @Override
     public StubSmartCard build() {
-      return new StubSmartCard(atr, cardProtocol, hexCommands);
+      return new StubSmartCard(powerOnData, cardProtocol, hexCommands);
     }
 
     /**
@@ -203,8 +203,8 @@ public class StubSmartCard {
      * @since 2.0
      */
     @Override
-    public ProtocolStep withAtr(byte[] atr) {
-      this.atr = atr;
+    public ProtocolStep withPowerOnData(byte[] powerOnData) {
+      this.powerOnData = powerOnData;
       return this;
     }
 
@@ -221,15 +221,15 @@ public class StubSmartCard {
     }
   }
 
-  public interface AtrStep {
+  public interface PowerOnDataStep {
     /**
-     * Define simulated Atr for the {@link StubSmartCard} to build
+     * Define simulated power-on data for the {@link StubSmartCard} to build
      *
-     * @param atr (not nullable) byte of array
+     * @param powerOnData (not nullable) byte of array
      * @return next step of builder
      * @since 2.0
      */
-    ProtocolStep withAtr(byte[] atr);
+    ProtocolStep withPowerOnData(byte[] powerOnData);
   }
 
   public interface ProtocolStep {
