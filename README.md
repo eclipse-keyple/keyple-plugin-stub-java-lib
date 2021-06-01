@@ -4,7 +4,7 @@
 
 The **Keyple Java Plugin Stub** contains interfaces and classes to manage virtual readers and emulated smart cards within a Keyple application.
 
-This library **should be import explicitly** by the main application.
+This library **should be imported explicitly** by the main application.
 
 ## User Guide & Download Information
 
