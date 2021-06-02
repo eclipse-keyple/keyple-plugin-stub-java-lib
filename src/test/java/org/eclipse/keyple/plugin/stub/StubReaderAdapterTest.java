@@ -49,7 +49,7 @@ public class StubReaderAdapterTest {
     adapter.activateProtocol(PROTOCOL);
     adapter.insertCard(card);
     assertThat(adapter.getSmartcard()).isEqualTo(card);
-    assertThat(adapter.getPowerOnData()).isEqualTo(card.getPowerOnData());
+    assertThat(adapter.getPowerOnDataBytes()).isEqualTo(card.getPowerOnDataBytes());
     assertThat(adapter.isPhysicalChannelOpen()).isEqualTo(card.isPhysicalChannelOpen());
     assertThat(adapter.checkCardPresence()).isTrue();
     assertThat(adapter.isCurrentProtocol(PROTOCOL)).isTrue();
