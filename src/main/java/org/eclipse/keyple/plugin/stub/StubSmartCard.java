@@ -65,7 +65,7 @@ public class StubSmartCard {
    * @return Null if no power-on data are available.
    * @since 2.0
    */
-  byte[] getPowerOnDataBytes() {
+  byte[] getPowerOnData() {
     return powerOnData;
   }
 

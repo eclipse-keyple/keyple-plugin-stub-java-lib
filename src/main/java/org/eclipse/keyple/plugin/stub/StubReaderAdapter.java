@@ -19,6 +19,7 @@ import org.eclipse.keyple.core.plugin.spi.reader.observable.state.insertion.Wait
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.DontWaitForCardRemovalDuringProcessingSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.removal.WaitForCardRemovalNonBlockingSpi;
 import org.eclipse.keyple.core.util.Assert;
+import org.eclipse.keyple.core.util.ByteArrayUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -178,8 +179,8 @@ final class StubReaderAdapter
    * @since 2.0
    */
   @Override
-  public byte[] getPowerOnDataBytes() {
-    return smartCard.getPowerOnDataBytes();
+  public String getPowerOnData() {
+    return ByteArrayUtil.toHex(smartCard.getPowerOnData());
   }
   /**
    * {@inheritDoc}
