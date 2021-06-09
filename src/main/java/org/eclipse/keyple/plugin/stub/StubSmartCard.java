@@ -1,5 +1,5 @@
 /* **************************************************************************************
- * Copyright (c) 2018 Calypso Networks Association https://www.calypsonet-asso.org/
+ * Copyright (c) 2018 Calypso Networks Association https://calypsonet.org/
  *
  * See the NOTICE file(s) distributed with this work for additional information
  * regarding copyright ownership.
@@ -65,7 +65,7 @@ public class StubSmartCard {
    * @return Null if no power-on data are available.
    * @since 2.0
    */
-  byte[] getPowerOnDataBytes() {
+  byte[] getPowerOnData() {
     return powerOnData;
   }
 
