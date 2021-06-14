@@ -1,1 +1,1 @@
-rootProject.name = "keyple-plugin-stub-lib"
+rootProject.name = "keyple-plugin-stub-java-lib"
