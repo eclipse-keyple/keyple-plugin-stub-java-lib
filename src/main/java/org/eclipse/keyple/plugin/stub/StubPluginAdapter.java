@@ -103,7 +103,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @since 2.0
    */
   @Override
-  public void unregister() {
+  public void onUnregister() {
     // NO-OP
   }
   /**
