@@ -14,7 +14,7 @@ package org.eclipse.keyple.plugin.stub;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.eclipse.keyple.plugin.stub.StubSmartCardTest.buildACard;
 
-import org.eclipse.keyple.core.common.CommonsApiProperties;
+import org.eclipse.keyple.core.common.CommonApiProperties;
 import org.eclipse.keyple.core.plugin.PluginApiProperties;
 import org.eclipse.keyple.core.plugin.PluginIOException;
 import org.junit.Before;
@@ -43,7 +43,7 @@ public class StubPluginFactoryAdapterTest {
                 .build();
 
     assertThat(factory.getPluginApiVersion()).isEqualTo(PluginApiProperties.VERSION);
-    assertThat(factory.getCommonsApiVersion()).isEqualTo(CommonsApiProperties.VERSION);
+    assertThat(factory.getCommonApiVersion()).isEqualTo(CommonApiProperties.VERSION);
 
     StubPluginAdapter stubPlugin = (StubPluginAdapter) factory.getPlugin();
     assertThat(stubPlugin).isNotNull();

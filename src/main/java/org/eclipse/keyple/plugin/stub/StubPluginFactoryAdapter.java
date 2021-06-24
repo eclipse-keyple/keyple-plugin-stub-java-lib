@@ -12,7 +12,7 @@
 package org.eclipse.keyple.plugin.stub;
 
 import java.util.Set;
-import org.eclipse.keyple.core.common.CommonsApiProperties;
+import org.eclipse.keyple.core.common.CommonApiProperties;
 import org.eclipse.keyple.core.plugin.PluginApiProperties;
 import org.eclipse.keyple.core.plugin.spi.PluginFactorySpi;
 import org.eclipse.keyple.core.plugin.spi.PluginSpi;
@@ -63,8 +63,8 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    * @since 2.0
    */
   @Override
-  public String getCommonsApiVersion() {
-    return CommonsApiProperties.VERSION;
+  public String getCommonApiVersion() {
+    return CommonApiProperties.VERSION;
   }
 
   /**
