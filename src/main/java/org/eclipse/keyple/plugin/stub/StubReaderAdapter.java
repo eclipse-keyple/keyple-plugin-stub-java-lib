@@ -13,10 +13,12 @@ package org.eclipse.keyple.plugin.stub;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.keyple.core.plugin.CardIOException;
+import org.eclipse.keyple.core.plugin.TaskCanceledException;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.ObservableReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.insertion.WaitForCardInsertionNonBlockingSpi;
-import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.DontWaitForCardRemovalDuringProcessingSpi;
+import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.WaitForCardRemovalBlockingDuringProcessingSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.removal.WaitForCardRemovalNonBlockingSpi;
 import org.eclipse.keyple.core.util.Assert;
 import org.eclipse.keyple.core.util.ByteArrayUtil;
@@ -33,7 +35,7 @@ final class StubReaderAdapter
     implements StubReader,
         ObservableReaderSpi,
         WaitForCardInsertionNonBlockingSpi,
-        DontWaitForCardRemovalDuringProcessingSpi,
+        WaitForCardRemovalBlockingDuringProcessingSpi,
         WaitForCardRemovalNonBlockingSpi {
 
   private static final Logger logger = LoggerFactory.getLogger(StubReaderAdapter.class);
@@ -43,6 +45,7 @@ final class StubReaderAdapter
   private final Set<String> activatedProtocols;
 
   private StubSmartCard smartCard;
+  private final AtomicBoolean continueWaitForCardRemovalTask = new AtomicBoolean();
 
   /**
    * (package-private)<br>
@@ -50,7 +53,7 @@ final class StubReaderAdapter
    *
    * @param name name of the reader
    * @param isContactLess true if contactless
-   * @param card (optionnal) inserted smart card at creation
+   * @param card (optional) inserted smart card at creation
    * @since 2.0
    */
   StubReaderAdapter(String name, Boolean isContactLess, StubSmartCard card) {
@@ -255,6 +258,7 @@ final class StubReaderAdapter
       this.smartCard = null;
     }
   }
+
   /**
    * {@inheritDoc}
    *
@@ -263,5 +267,36 @@ final class StubReaderAdapter
   @Override
   public StubSmartCard getSmartcard() {
     return smartCard;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 2.0
+   */
+  @Override
+  public void waitForCardRemovalDuringProcessing() throws TaskCanceledException {
+    while (smartCard != null
+        && continueWaitForCardRemovalTask.get()
+        && !Thread.currentThread().isInterrupted()) {
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        Thread.currentThread().interrupt();
+      }
+    }
+    if (!continueWaitForCardRemovalTask.get()) {
+      throw new TaskCanceledException("Wait for card removal task cancelled");
+    }
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 2.0
+   */
+  @Override
+  public void stopWaitForCardRemovalDuringProcessing() {
+    continueWaitForCardRemovalTask.set(false);
   }
 }
