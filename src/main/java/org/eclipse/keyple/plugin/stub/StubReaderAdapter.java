@@ -18,7 +18,7 @@ import org.eclipse.keyple.core.plugin.CardIOException;
 import org.eclipse.keyple.core.plugin.TaskCanceledException;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.ObservableReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.insertion.WaitForCardInsertionNonBlockingSpi;
-import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.WaitForCardRemovalBlockingDuringProcessingSpi;
+import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.WaitForCardRemovalDuringProcessingBlockingSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.removal.WaitForCardRemovalNonBlockingSpi;
 import org.eclipse.keyple.core.util.Assert;
 import org.eclipse.keyple.core.util.ByteArrayUtil;
@@ -35,7 +35,7 @@ final class StubReaderAdapter
     implements StubReader,
         ObservableReaderSpi,
         WaitForCardInsertionNonBlockingSpi,
-        WaitForCardRemovalBlockingDuringProcessingSpi,
+        WaitForCardRemovalDuringProcessingBlockingSpi,
         WaitForCardRemovalNonBlockingSpi {
 
   private static final Logger logger = LoggerFactory.getLogger(StubReaderAdapter.class);
