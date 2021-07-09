@@ -43,7 +43,9 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @since 2.0
    */
   StubPluginAdapter(
-      String name, Set<StubReaderConfiguration> readerConfigurations, int monitoringCycleDuration) {
+      String name,
+      Set<? extends StubReaderConfiguration> readerConfigurations,
+      int monitoringCycleDuration) {
     this.name = name;
     this.monitoringCycleDuration = monitoringCycleDuration;
     this.stubReaders = new ConcurrentHashMap<String, StubReaderAdapter>();
