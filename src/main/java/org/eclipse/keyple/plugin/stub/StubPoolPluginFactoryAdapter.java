@@ -20,7 +20,7 @@ import org.eclipse.keyple.plugin.stub.StubPluginFactoryAdapter.StubReaderConfigu
 
 /**
  * (package-private)<br>
- * Factory of {@link StubPlugin}.
+ * Factory of {@link StubPoolPlugin}.
  *
  * @since 2.0
  */
@@ -90,6 +90,8 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, Plugi
 
   static class StubPoolReaderConfiguration extends StubReaderConfiguration {
 
+    private final String groupReference;
+
     /**
      * (package-private) constructor for a reader configuration
      *
@@ -100,6 +102,11 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, Plugi
      */
     StubPoolReaderConfiguration(String groupReference, String name, StubSmartCard card) {
       super(name, false, card);
+      this.groupReference = groupReference;
+    }
+
+    String getGroupReference() {
+      return groupReference;
     }
   }
 }
