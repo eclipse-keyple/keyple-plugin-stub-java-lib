@@ -30,7 +30,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
 
   private final StubPluginAdapter stubPluginAdapter;
   private final Map<String, String> readerToGroup;
-  private final List<String> allocatedReaders; // list of allocated readers by their readerName
+  private final Set<String> allocatedReaders; // list of allocated readers by their readerName
 
   /**
    * (package-private )constructor
@@ -47,7 +47,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
     this.stubPluginAdapter =
         new StubPluginAdapter(name, readerConfigurations, monitoringCycleDuration);
     this.readerToGroup = new ConcurrentHashMap<String, String>();
-    this.allocatedReaders = new ArrayList<String>();
+    this.allocatedReaders = new HashSet<String>();
   }
 
   /**
@@ -90,17 +90,16 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
     Set<String> candidateReadersName;
 
     if (readerGroupReference == null) {
-      // any reader is candidate to be allocated
+      // every reader is candidate for allocation
       candidateReadersName = stubPluginAdapter.searchAvailableReaderNames();
     } else {
-      // only readers drom the readerGroupReference
+      // only readers from the readerGroupReference are candidates for allocation
       candidateReadersName = listReadersByGroup(readerGroupReference);
     }
 
     // find the first non allocated reader among candidates
     for (String readerName : candidateReadersName) {
-      if (!allocatedReaders.contains(readerName)) {
-        allocatedReaders.add(readerName);
+      if (allocatedReaders.add(readerName)) {
         return stubPluginAdapter.searchReader(readerName);
       }
     }
