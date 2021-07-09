@@ -27,7 +27,6 @@ public interface StubPoolPlugin extends KeyplePluginExtension {
    * @param readerName name of the new stub reader (mandatory). Each reader should have a unique
    *     name, no matter to what groupReference they are associated to
    * @param card insert a card at creation (can be null)
-   * @return created StubReader @Since 2.0
    */
   void plugPoolReader(String groupReference, String readerName, StubSmartCard card);
 

@@ -62,6 +62,7 @@ public final class StubPoolPluginFactoryBuilder {
      * Initialize the plugin with a stub reader. Multiple readers can be added. The reader can
      * contain a smart card. Readers name should be unique.
      *
+     * @param groupReference Reader group reference.
      * @param name name for the initially inserted reader (not nullable and unique)
      * @param card (optional) inserted smart card
      * @return instance of the builder
