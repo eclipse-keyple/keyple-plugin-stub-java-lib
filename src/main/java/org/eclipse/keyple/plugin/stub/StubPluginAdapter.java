@@ -17,7 +17,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import org.eclipse.keyple.core.plugin.PluginIOException;
 import org.eclipse.keyple.core.plugin.spi.ObservablePluginSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.ReaderSpi;
 import org.eclipse.keyple.core.util.Assert;
@@ -69,7 +68,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @since 2.0
    */
   @Override
-  public Set<String> searchAvailableReaderNames() throws PluginIOException {
+  public Set<String> searchAvailableReaderNames() {
     return new HashSet<String>(stubReaders.keySet());
   }
   /**
@@ -78,7 +77,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @since 2.0
    */
   @Override
-  public ReaderSpi searchReader(String readerName) throws PluginIOException {
+  public ReaderSpi searchReader(String readerName) {
     return stubReaders.get(readerName);
   }
   /**
@@ -96,8 +95,8 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @since 2.0
    */
   @Override
-  public Set<ReaderSpi> searchAvailableReaders() throws PluginIOException {
-    return new HashSet(stubReaders.values());
+  public Set<ReaderSpi> searchAvailableReaders() {
+    return new HashSet<ReaderSpi>(stubReaders.values());
   }
   /**
    * {@inheritDoc}

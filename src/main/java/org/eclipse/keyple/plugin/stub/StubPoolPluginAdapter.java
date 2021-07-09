@@ -36,7 +36,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * (package-private )constructor
    *
    * @param name name of the plugin
-   * @param readerConfigurations configuraitons of the reader to plug initially
+   * @param readerConfigurations configurations of the reader to plug initially
    * @param monitoringCycleDuration duration between two monitoring cycle
    * @since 2.0
    */
@@ -69,7 +69,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * @since 2.0
    */
   @Override
-  public Set<ReaderSpi> searchAvailableReaders() throws PluginIOException {
+  public Set<ReaderSpi> searchAvailableReaders() {
     return this.stubPluginAdapter.searchAvailableReaders();
   }
 
@@ -79,7 +79,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * @since 2.0
    */
   @Override
-  public SortedSet<String> getReaderGroupReferences() throws PluginIOException {
+  public SortedSet<String> getReaderGroupReferences() {
     return new TreeSet<String>(readerToGroup.values());
   }
 
@@ -207,7 +207,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * @since 2.0
    */
   @Override
-  public Set<String> searchAvailableReaderNames() throws PluginIOException {
+  public Set<String> searchAvailableReaderNames() {
     return stubPluginAdapter.searchAvailableReaderNames();
   }
 
@@ -217,7 +217,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * @since 2.0
    */
   @Override
-  public ReaderSpi searchReader(String readerName) throws PluginIOException {
+  public ReaderSpi searchReader(String readerName) {
     return stubPluginAdapter.searchReader(readerName);
   }
 

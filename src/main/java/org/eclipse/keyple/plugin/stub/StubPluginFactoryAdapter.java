@@ -127,7 +127,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
 
     /**
      * (package-private)<br>
-     * Should the reader be contacless
+     * Should the reader be contactless
      *
      * @return not nullable boolean
      * @since 2.0

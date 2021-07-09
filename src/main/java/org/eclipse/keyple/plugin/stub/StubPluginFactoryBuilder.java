@@ -26,7 +26,7 @@ public final class StubPluginFactoryBuilder {
    *
    * @since 2.0
    */
-  public static String PLUGIN_NAME = "StubPlugin";
+  public static final String PLUGIN_NAME = "StubPlugin";
 
   private StubPluginFactoryBuilder() {}
 

@@ -114,10 +114,10 @@ public class StubSmartCard {
       return new byte[0];
     }
 
-    // convert apduIn to hexa
+    // convert apduIn to hex
     String hexApdu = ByteArrayUtil.toHex(apduIn);
 
-    // return matching hexa response if the provided APDU matches the regex
+    // return matching hex response if the provided APDU matches the regex
     Pattern p;
     for (Map.Entry<String, String> hexCommand : hexCommands.entrySet()) {
       p = Pattern.compile(hexCommand.getKey());
@@ -153,7 +153,7 @@ public class StubSmartCard {
   /**
    * Creates a builder for the {@link StubSmartCard}
    *
-   * @return Next step of the buider
+   * @return Next step of the builder
    * @since 2.0
    */
   public static PowerOnDataStep builder() {
@@ -166,9 +166,10 @@ public class StubSmartCard {
    * @since 2.0
    */
   public static class Builder implements PowerOnDataStep, ProtocolStep, CommandStep {
+
     private byte[] powerOnData;
     private String cardProtocol;
-    private Map<String, String> hexCommands;
+    private final Map<String, String> hexCommands;
 
     private Builder() {
       hexCommands = new HashMap<String, String>();
@@ -214,7 +215,7 @@ public class StubSmartCard {
      * @since 2.0
      */
     @Override
-    public Builder withProcotol(String protocol) {
+    public Builder withProtocol(String protocol) {
       Assert.getInstance().notNull(protocol, "Protocol");
       this.cardProtocol = protocol;
       return this;
@@ -240,7 +241,7 @@ public class StubSmartCard {
      * @return next step of builder
      * @since 2.0
      */
-    CommandStep withProcotol(String protocol);
+    CommandStep withProtocol(String protocol);
   }
 
   public interface CommandStep {

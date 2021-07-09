@@ -43,7 +43,7 @@ public class StubSmartCardTest {
     card =
         StubSmartCard.builder()
             .withPowerOnData(powerOnData)
-            .withProcotol(protocol)
+            .withProtocol(protocol)
             .withSimulatedCommand(commandHexRegexp, responseHex)
             .build();
     byte[] apduResponse = card.processApdu(ByteArrayUtil.fromHex(commandHex));
@@ -67,7 +67,7 @@ public class StubSmartCardTest {
   static StubSmartCard buildACard() {
     return StubSmartCard.builder()
         .withPowerOnData(powerOnData)
-        .withProcotol(protocol)
+        .withProtocol(protocol)
         .withSimulatedCommand(commandHex, responseHex)
         .build();
   }

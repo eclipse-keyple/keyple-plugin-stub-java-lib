@@ -103,7 +103,7 @@ public class StubReaderAdapterTest {
   private StubSmartCard buildCard(String protocol) {
     return StubSmartCard.builder()
         .withPowerOnData(ByteArrayUtil.fromHex("0000"))
-        .withProcotol(protocol)
+        .withProtocol(protocol)
         .withSimulatedCommand(commandHex, responseHex)
         .build();
   }
