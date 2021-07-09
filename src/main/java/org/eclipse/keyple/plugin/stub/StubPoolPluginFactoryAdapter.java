@@ -14,8 +14,8 @@ package org.eclipse.keyple.plugin.stub;
 import java.util.Set;
 import org.eclipse.keyple.core.common.CommonApiProperties;
 import org.eclipse.keyple.core.plugin.PluginApiProperties;
-import org.eclipse.keyple.core.plugin.spi.PluginFactorySpi;
-import org.eclipse.keyple.core.plugin.spi.PluginSpi;
+import org.eclipse.keyple.core.plugin.spi.PoolPluginFactorySpi;
+import org.eclipse.keyple.core.plugin.spi.PoolPluginSpi;
 import org.eclipse.keyple.plugin.stub.StubPluginFactoryAdapter.StubReaderConfiguration;
 
 /**
@@ -24,7 +24,7 @@ import org.eclipse.keyple.plugin.stub.StubPluginFactoryAdapter.StubReaderConfigu
  *
  * @since 2.0
  */
-final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PluginFactorySpi {
+final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolPluginFactorySpi {
 
   private final Set<StubPoolReaderConfiguration> readerConfigurations;
   private final int monitoringCycleDuration;
@@ -74,7 +74,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, Plugi
    * @since 2.0
    */
   @Override
-  public String getPluginName() {
+  public String getPoolPluginName() {
     return pluginName;
   }
 
@@ -84,7 +84,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, Plugi
    * @since 2.0
    */
   @Override
-  public PluginSpi getPlugin() {
+  public PoolPluginSpi getPoolPlugin() {
     return new StubPoolPluginAdapter(pluginName, readerConfigurations, monitoringCycleDuration);
   }
 

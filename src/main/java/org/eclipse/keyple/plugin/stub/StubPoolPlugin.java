@@ -1,5 +1,5 @@
 /* **************************************************************************************
- * Copyright (c) 2019 Calypso Networks Association https://calypsonet.org/
+ * Copyright (c) 2021 Calypso Networks Association https://calypsonet.org/
  *
  * See the NOTICE file(s) distributed with this work for additional information
  * regarding copyright ownership.
@@ -27,8 +27,7 @@ public interface StubPoolPlugin extends KeyplePluginExtension {
    * @param readerName name of the new stub reader (mandatory). Each reader should have a unique
    *     name, no matter to what groupReference they are associated to
    * @param card insert a card at creation (can be null)
-   * @return created StubReader
-   * @since 1.0
+   * @return created StubReader @Since 2.0
    */
   void plugPoolReader(String groupReference, String readerName, StubSmartCard card);
 
@@ -36,16 +35,14 @@ public interface StubPoolPlugin extends KeyplePluginExtension {
    * Unplug synchronously all readers associated to a groupReference. A READER_DISCONNECTED event
    * will be raised.
    *
-   * @param groupReference groupReference of the reader(s) to be unplugged (mandatory)
-   * @since 1.0
+   * @param groupReference groupReference of the reader(s) to be unplugged (mandatory) @Since 2.0
    */
   void unplugPoolReaders(String groupReference);
 
   /**
    * Unplug synchronously a pool reader. A READER_DISCONNECTED event will be raised.
    *
-   * @param readerName name of the reader to be unplugged (mandatory)
-   * @since 1.0
+   * @param readerName name of the reader to be unplugged (mandatory) @Since 2.0
    */
   void unplugPoolReader(String readerName);
 }

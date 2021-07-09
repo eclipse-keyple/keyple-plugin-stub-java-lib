@@ -49,7 +49,7 @@ public class StubPoolPluginFactoryAdapterTest {
     assertThat(factory.getPluginApiVersion()).isEqualTo(PluginApiProperties.VERSION);
     assertThat(factory.getCommonApiVersion()).isEqualTo(CommonApiProperties.VERSION);
 
-    StubPoolPluginAdapter stubPlugin = (StubPoolPluginAdapter) factory.getPlugin();
+    StubPoolPluginAdapter stubPlugin = (StubPoolPluginAdapter) factory.getPoolPlugin();
     assertThat(stubPlugin).isNotNull();
     assertThat(stubPlugin.getName()).isEqualTo(StubPoolPluginFactoryBuilder.PLUGIN_NAME);
     assertThat(stubPlugin.getMonitoringCycleDuration()).isEqualTo(monitoringCycle);

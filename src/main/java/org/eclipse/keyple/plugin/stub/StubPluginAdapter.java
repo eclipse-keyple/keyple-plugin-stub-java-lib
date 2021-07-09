@@ -38,8 +38,8 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * (package-private )constructor
    *
    * @param name name of the plugin
-   * @param readerConfigurations configuraitons of the reader to plug initially
-   * @param monitoringCycleDuration duration between two monitoring cycle
+   * @param readerConfigurations configurations of the reader to plug initially
+   * @param monitoringCycleDuration duration between two monitoring cycles
    * @since 2.0
    */
   StubPluginAdapter(
