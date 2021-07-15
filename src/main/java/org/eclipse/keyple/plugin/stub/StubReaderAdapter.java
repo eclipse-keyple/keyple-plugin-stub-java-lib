@@ -276,6 +276,7 @@ final class StubReaderAdapter
    */
   @Override
   public void waitForCardRemovalDuringProcessing() throws TaskCanceledException {
+    continueWaitForCardRemovalTask.set(true);
     while (smartCard != null
         && continueWaitForCardRemovalTask.get()
         && !Thread.currentThread().isInterrupted()) {
