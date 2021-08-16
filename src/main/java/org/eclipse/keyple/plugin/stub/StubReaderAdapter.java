@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.keyple.core.plugin.CardIOException;
 import org.eclipse.keyple.core.plugin.TaskCanceledException;
+import org.eclipse.keyple.core.plugin.spi.reader.ConfigurableReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.ObservableReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.insertion.WaitForCardInsertionNonBlockingSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.WaitForCardRemovalDuringProcessingBlockingSpi;
@@ -33,6 +34,7 @@ import org.slf4j.LoggerFactory;
  */
 final class StubReaderAdapter
     implements StubReader,
+        ConfigurableReaderSpi,
         ObservableReaderSpi,
         WaitForCardInsertionNonBlockingSpi,
         WaitForCardRemovalDuringProcessingBlockingSpi,
