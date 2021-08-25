@@ -19,14 +19,14 @@ import org.eclipse.keyple.plugin.stub.StubPoolPluginFactoryAdapter.StubPoolReade
 /**
  * Builds instances of {@link StubPoolPluginFactory}.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public final class StubPoolPluginFactoryBuilder {
 
   /**
    * The plugin default name
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   public static final String PLUGIN_NAME = "StubPoolPlugin";
 
@@ -36,7 +36,7 @@ public final class StubPoolPluginFactoryBuilder {
    * Creates builder to build a {@link StubPoolPluginFactory}.
    *
    * @return created builder
-   * @since 2.0
+   * @since 2.0.0
    */
   public static StubPoolPluginFactoryBuilder.Builder builder() {
     return new StubPoolPluginFactoryBuilder.Builder();
@@ -45,7 +45,7 @@ public final class StubPoolPluginFactoryBuilder {
   /**
    * Builder to build a {@link StubPoolPluginFactory}.
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   public static class Builder {
 
@@ -66,7 +66,7 @@ public final class StubPoolPluginFactoryBuilder {
      * @param name name for the initially inserted reader (not nullable and unique)
      * @param card (optional) inserted smart card
      * @return instance of the builder
-     * @since 2.0
+     * @since 2.0.0
      */
     public StubPoolPluginFactoryBuilder.Builder withStubReader(
         String groupReference, String name, StubSmartCard card) {
@@ -80,7 +80,7 @@ public final class StubPoolPluginFactoryBuilder {
      *
      * @param duration in milliseconds, default value : 0
      * @return instance of the builder
-     * @since 2.0
+     * @since 2.0.0
      */
     public StubPoolPluginFactoryBuilder.Builder withMonitoringCycleDuration(int duration) {
       this.monitoringCycleDuration = duration;
@@ -91,7 +91,7 @@ public final class StubPoolPluginFactoryBuilder {
      * Returns an instance of StubPoolPluginFactory created from the fields set on this builder.
      *
      * @return A {@link StubPoolPluginFactory}
-     * @since 2.0
+     * @since 2.0.0
      */
     public StubPoolPluginFactory build() {
       return new StubPoolPluginFactoryAdapter(

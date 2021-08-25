@@ -22,7 +22,7 @@ import org.eclipse.keyple.core.util.ByteArrayUtil;
  * Simulated smart card that can be inserted into a {@link StubReader}. Use the {@link Builder} to
  * create this object
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public class StubSmartCard {
 
@@ -38,7 +38,7 @@ public class StubSmartCard {
    * @param powerOnData (non nullable) power-on data of the card
    * @param cardProtocol (non nullable) card protocol
    * @param hexCommands (non nullable) set of simulated commands
-   * @since 2.0
+   * @since 2.0.0
    */
   private StubSmartCard(byte[] powerOnData, String cardProtocol, Map<String, String> hexCommands) {
     this.powerOnData = powerOnData;
@@ -52,7 +52,7 @@ public class StubSmartCard {
    * Gets the card protocol supported by the card
    *
    * @return A not empty String.
-   * @since 2.0
+   * @since 2.0.0
    */
   String getCardProtocol() {
     return cardProtocol;
@@ -63,7 +63,7 @@ public class StubSmartCard {
    * Get the card power-on data
    *
    * @return Null if no power-on data are available.
-   * @since 2.0
+   * @since 2.0.0
    */
   byte[] getPowerOnData() {
     return powerOnData;
@@ -74,7 +74,7 @@ public class StubSmartCard {
    * Get the status of the physical channel
    *
    * @return True if the physical channel is open
-   * @since 2.0
+   * @since 2.0.0
    */
   boolean isPhysicalChannelOpen() {
     return isPhysicalChannelOpen;
@@ -84,7 +84,7 @@ public class StubSmartCard {
    * (package-private) <br>
    * Open the physical channel of the card
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   void openPhysicalChannel() {
     this.isPhysicalChannelOpen = true;
@@ -94,7 +94,7 @@ public class StubSmartCard {
    * (package-private) <br>
    * Close the physical channel of the card
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   void closePhysicalChannel() {
     this.isPhysicalChannelOpen = false;
@@ -106,7 +106,7 @@ public class StubSmartCard {
    *
    * @param apduIn commands to be processed
    * @return APDU response
-   * @since 2.0
+   * @since 2.0.0
    */
   byte[] processApdu(byte[] apduIn) throws CardIOException {
 
@@ -133,7 +133,7 @@ public class StubSmartCard {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String toString() {
@@ -154,7 +154,7 @@ public class StubSmartCard {
    * Creates a builder for the {@link StubSmartCard}
    *
    * @return Next step of the builder
-   * @since 2.0
+   * @since 2.0.0
    */
   public static PowerOnDataStep builder() {
     return new Builder();
@@ -163,7 +163,7 @@ public class StubSmartCard {
   /**
    * Builder class for {@link StubSmartCard}.
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   public static class Builder implements PowerOnDataStep, ProtocolStep, CommandStep {
 
@@ -178,7 +178,7 @@ public class StubSmartCard {
     /**
      * {@inheritDoc}
      *
-     * @since 2.0
+     * @since 2.0.0
      */
     @Override
     public Builder withSimulatedCommand(String command, String response) {
@@ -191,7 +191,7 @@ public class StubSmartCard {
     /**
      * {@inheritDoc}
      *
-     * @since 2.0
+     * @since 2.0.0
      */
     @Override
     public StubSmartCard build() {
@@ -201,7 +201,7 @@ public class StubSmartCard {
     /**
      * {@inheritDoc}
      *
-     * @since 2.0
+     * @since 2.0.0
      */
     @Override
     public ProtocolStep withPowerOnData(byte[] powerOnData) {
@@ -212,7 +212,7 @@ public class StubSmartCard {
     /**
      * {@inheritDoc}
      *
-     * @since 2.0
+     * @since 2.0.0
      */
     @Override
     public Builder withProtocol(String protocol) {
@@ -228,7 +228,7 @@ public class StubSmartCard {
      *
      * @param powerOnData (not nullable) byte of array
      * @return next step of builder
-     * @since 2.0
+     * @since 2.0.0
      */
     ProtocolStep withPowerOnData(byte[] powerOnData);
   }
@@ -239,7 +239,7 @@ public class StubSmartCard {
      *
      * @param protocol (not nullable) protocol name
      * @return next step of builder
-     * @since 2.0
+     * @since 2.0.0
      */
     CommandStep withProtocol(String protocol);
   }
@@ -252,7 +252,7 @@ public class StubSmartCard {
      * @param command hexadecimal command to respond to (can be a regexp to match multiple apdu)
      * @param response hexadecimal response
      * @return next step of builder
-     * @since 2.0
+     * @since 2.0.0
      */
     CommandStep withSimulatedCommand(String command, String response);
 

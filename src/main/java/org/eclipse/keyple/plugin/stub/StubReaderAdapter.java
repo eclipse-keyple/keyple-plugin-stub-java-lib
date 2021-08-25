@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * (package-private)<br>
  * The adapter for the StubReader is also an ObservableReaderSpi
  *
- * @since 2.0
+ * @since 2.0.0
  */
 final class StubReaderAdapter
     implements StubReader,
@@ -56,7 +56,7 @@ final class StubReaderAdapter
    * @param name name of the reader
    * @param isContactLess true if contactless
    * @param card (optional) inserted smart card at creation
-   * @since 2.0
+   * @since 2.0.0
    */
   StubReaderAdapter(String name, Boolean isContactLess, StubSmartCard card) {
     this.name = name;
@@ -72,7 +72,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void onStartDetection() {
@@ -82,7 +82,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void onStopDetection() {
@@ -92,7 +92,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getName() {
@@ -101,7 +101,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public boolean isProtocolSupported(String readerProtocol) {
@@ -110,7 +110,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void activateProtocol(String readerProtocol) {
@@ -119,7 +119,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void deactivateProtocol(String readerProtocol) {
@@ -128,7 +128,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public boolean isCurrentProtocol(String readerProtocol) {
@@ -141,7 +141,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void openPhysicalChannel() {
@@ -152,7 +152,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void closePhysicalChannel() {
@@ -163,7 +163,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public boolean isPhysicalChannelOpen() {
@@ -172,7 +172,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public boolean checkCardPresence() {
@@ -181,7 +181,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getPowerOnData() {
@@ -190,7 +190,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public byte[] transmitApdu(byte[] apduIn) throws CardIOException {
@@ -202,7 +202,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public boolean isContactless() {
@@ -211,7 +211,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void onUnregister() {
@@ -224,7 +224,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void insertCard(StubSmartCard smartCard) {
@@ -250,7 +250,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void removeCard() {
@@ -264,7 +264,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public StubSmartCard getSmartcard() {
@@ -274,7 +274,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void waitForCardRemovalDuringProcessing() throws TaskCanceledException {
@@ -296,7 +296,7 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void stopWaitForCardRemovalDuringProcessing() {

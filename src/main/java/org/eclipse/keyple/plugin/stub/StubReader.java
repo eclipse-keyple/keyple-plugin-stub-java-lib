@@ -17,7 +17,7 @@ import org.eclipse.keyple.core.common.KeypleReaderExtension;
  * The Stub Reader supports programmatically the insertion and removal of {@link StubSmartCard} <br>
  * To invoke those methods use Reader#getExtension(StubReader.class) from the Reader class.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public interface StubReader extends KeypleReaderExtension {
 
@@ -28,14 +28,14 @@ public interface StubReader extends KeypleReaderExtension {
    * such case it raises a CARD_INSERTED event.
    *
    * @param smartCard stub card to be inserted in the reader (not nullable)
-   * @since 2.0
+   * @since 2.0.0
    */
   void insertCard(StubSmartCard smartCard);
 
   /**
    * Remove card from reader if any
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   void removeCard();
 
@@ -43,7 +43,7 @@ public interface StubReader extends KeypleReaderExtension {
    * Get inserted card
    *
    * @return instance of a {@link StubSmartCard}, can be null if no card inserted
-   * @since 2.0
+   * @since 2.0.0
    */
   StubSmartCard getSmartcard();
 }

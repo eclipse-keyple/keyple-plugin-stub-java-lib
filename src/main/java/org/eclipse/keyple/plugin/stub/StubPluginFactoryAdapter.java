@@ -21,7 +21,7 @@ import org.eclipse.keyple.core.plugin.spi.PluginSpi;
  * (package-private)<br>
  * Factory of {@link StubPlugin}.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactorySpi {
 
@@ -36,7 +36,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    * @param pluginName name of the plugin
    * @param readerConfigurations readerConfigurations to be created at init
    * @param monitoringCycleDuration duration of each monitoring cycle
-   * @since 2.0
+   * @since 2.0.0
    */
   StubPluginFactoryAdapter(
       String pluginName,
@@ -50,7 +50,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getPluginApiVersion() {
@@ -60,7 +60,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getCommonApiVersion() {
@@ -70,7 +70,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getPluginName() {
@@ -80,7 +80,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public PluginSpi getPlugin() {
@@ -92,7 +92,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
    *
    * <p>Configuration for an initially plugged stubReader
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   static class StubReaderConfiguration {
 
@@ -106,7 +106,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
      * @param name name of the reader (not nullable)
      * @param isContactless true if the reader should be contactless (not nullable)
      * @param card inserted card (nullable)
-     * @since 2.0
+     * @since 2.0.0
      */
     StubReaderConfiguration(String name, boolean isContactless, StubSmartCard card) {
       this.name = name;
@@ -119,7 +119,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
      * Get the name of the reader
      *
      * @return not nullable name
-     * @since 2.0
+     * @since 2.0.0
      */
     String getName() {
       return name;
@@ -130,7 +130,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
      * Should the reader be contactless
      *
      * @return not nullable boolean
-     * @since 2.0
+     * @since 2.0.0
      */
     boolean getContactless() {
       return isContactless;
@@ -141,7 +141,7 @@ final class StubPluginFactoryAdapter implements StubPluginFactory, PluginFactory
      * Card inserted in the reader
      *
      * @return nullable object
-     * @since 2.0
+     * @since 2.0.0
      */
     StubSmartCard getCard() {
       return card;

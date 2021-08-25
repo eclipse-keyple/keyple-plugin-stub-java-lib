@@ -25,7 +25,7 @@ import org.eclipse.keyple.core.util.Assert;
  * (package-private)<br>
  * Internal adapter of the {@link StubPlugin}
  *
- * @since 2.0
+ * @since 2.0.0
  */
 class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
 
@@ -39,7 +39,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    * @param name name of the plugin
    * @param readerConfigurations configurations of the reader to plug initially
    * @param monitoringCycleDuration duration between two monitoring cycles
-   * @since 2.0
+   * @since 2.0.0
    */
   StubPluginAdapter(
       String name,
@@ -56,7 +56,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public int getMonitoringCycleDuration() {
@@ -65,7 +65,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public Set<String> searchAvailableReaderNames() {
@@ -74,7 +74,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public ReaderSpi searchReader(String readerName) {
@@ -83,7 +83,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getName() {
@@ -92,7 +92,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public Set<ReaderSpi> searchAvailableReaders() {
@@ -101,7 +101,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void onUnregister() {
@@ -110,7 +110,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void plugReader(String name, boolean isContactless, StubSmartCard card) {
@@ -120,7 +120,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void unplugReader(String name) {

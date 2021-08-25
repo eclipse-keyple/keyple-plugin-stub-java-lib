@@ -24,7 +24,7 @@ import org.eclipse.keyple.plugin.stub.StubPoolPluginFactoryAdapter.StubPoolReade
  * (package-private)<br>
  * Internal adapter of the {@link StubPoolPlugin}
  *
- * @since 2.0
+ * @since 2.0.0
  */
 class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, ObservablePluginSpi {
 
@@ -38,7 +38,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * @param name name of the plugin
    * @param readerConfigurations configurations of the reader to plug initially
    * @param monitoringCycleDuration duration between two monitoring cycle
-   * @since 2.0
+   * @since 2.0.0
    */
   StubPoolPluginAdapter(
       String name,
@@ -56,7 +56,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getName() {
@@ -66,7 +66,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public Set<ReaderSpi> searchAvailableReaders() {
@@ -76,7 +76,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public SortedSet<String> getReaderGroupReferences() {
@@ -86,7 +86,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public ReaderSpi allocateReader(String readerGroupReference) throws PluginIOException {
@@ -114,7 +114,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void releaseReader(ReaderSpi readerSpi) {
@@ -131,7 +131,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void onUnregister() {
@@ -141,7 +141,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void plugPoolReader(String groupReference, String readerName, StubSmartCard card) {
@@ -159,7 +159,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void unplugPoolReaders(String groupReference) {
@@ -175,7 +175,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public void unplugPoolReader(String readerName) {
@@ -194,7 +194,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public int getMonitoringCycleDuration() {
@@ -204,7 +204,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public Set<String> searchAvailableReaderNames() {
@@ -214,7 +214,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public ReaderSpi searchReader(String readerName) {

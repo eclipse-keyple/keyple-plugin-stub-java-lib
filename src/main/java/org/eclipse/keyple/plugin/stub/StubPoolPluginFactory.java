@@ -17,6 +17,6 @@ import org.eclipse.keyple.core.common.KeyplePluginExtensionFactory;
  * Stub specific {@link KeyplePluginExtensionFactory} to be provided to the Keyple SmartCard service
  * to register the Stub Pool plugin, built by {@link StubPoolPluginFactoryBuilder}.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public interface StubPoolPluginFactory extends KeyplePluginExtensionFactory {}

@@ -34,14 +34,14 @@ public interface StubPoolPlugin extends KeyplePluginExtension {
    * Unplug synchronously all readers associated to a groupReference. A READER_DISCONNECTED event
    * will be raised.
    *
-   * @param groupReference groupReference of the reader(s) to be unplugged (mandatory) @Since 2.0
+   * @param groupReference groupReference of the reader(s) to be unplugged (mandatory) @since 2.0.0
    */
   void unplugPoolReaders(String groupReference);
 
   /**
    * Unplug synchronously a pool reader. A READER_DISCONNECTED event will be raised.
    *
-   * @param readerName name of the reader to be unplugged (mandatory) @Since 2.0
+   * @param readerName name of the reader to be unplugged (mandatory) @since 2.0.0
    */
   void unplugPoolReader(String readerName);
 }

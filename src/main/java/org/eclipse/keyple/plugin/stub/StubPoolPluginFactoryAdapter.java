@@ -22,7 +22,7 @@ import org.eclipse.keyple.plugin.stub.StubPluginFactoryAdapter.StubReaderConfigu
  * (package-private)<br>
  * Factory of {@link StubPoolPlugin}.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolPluginFactorySpi {
 
@@ -37,7 +37,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolP
    * @param pluginName name of the plugin
    * @param readerConfigurations readerConfigurations to be created at init
    * @param monitoringCycleDuration duration of each monitoring cycle
-   * @since 2.0
+   * @since 2.0.0
    */
   StubPoolPluginFactoryAdapter(
       String pluginName,
@@ -51,7 +51,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolP
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getPluginApiVersion() {
@@ -61,7 +61,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolP
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getCommonApiVersion() {
@@ -71,7 +71,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolP
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public String getPoolPluginName() {
@@ -81,7 +81,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolP
   /**
    * {@inheritDoc}
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   @Override
   public PoolPluginSpi getPoolPlugin() {
@@ -98,7 +98,7 @@ final class StubPoolPluginFactoryAdapter implements StubPoolPluginFactory, PoolP
      * @param groupReference groupReference of the reader (not nullable)
      * @param name name of the reader (not nullable)
      * @param card inserted card (nullable)
-     * @since 2.0
+     * @since 2.0.0
      */
     StubPoolReaderConfiguration(String groupReference, String name, StubSmartCard card) {
       super(name, false, card);

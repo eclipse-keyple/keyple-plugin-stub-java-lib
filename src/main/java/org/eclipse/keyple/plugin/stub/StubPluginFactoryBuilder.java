@@ -17,14 +17,14 @@ import org.eclipse.keyple.core.util.Assert;
 /**
  * Builds instances of {@link StubPluginFactory}.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 public final class StubPluginFactoryBuilder {
 
   /**
    * The plugin default name
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   public static final String PLUGIN_NAME = "StubPlugin";
 
@@ -34,7 +34,7 @@ public final class StubPluginFactoryBuilder {
    * Creates builder to build a {@link StubPluginFactory}.
    *
    * @return created builder
-   * @since 2.0
+   * @since 2.0.0
    */
   public static Builder builder() {
     return new Builder();
@@ -43,7 +43,7 @@ public final class StubPluginFactoryBuilder {
   /**
    * Builder to build a {@link StubPluginFactory}.
    *
-   * @since 2.0
+   * @since 2.0.0
    */
   public static class Builder {
 
@@ -64,7 +64,7 @@ public final class StubPluginFactoryBuilder {
      * @param isContactLess true if the created reader should be contactless, false if not.
      * @param card (optional) inserted smart card
      * @return instance of the builder
-     * @since 2.0
+     * @since 2.0.0
      */
     public Builder withStubReader(String name, boolean isContactLess, StubSmartCard card) {
       Assert.getInstance().notNull(name, "Stub Reader name");
@@ -78,7 +78,7 @@ public final class StubPluginFactoryBuilder {
      *
      * @param duration in milliseconds, default value : 0
      * @return instance of the builder
-     * @since 2.0
+     * @since 2.0.0
      */
     public Builder withMonitoringCycleDuration(int duration) {
       this.monitoringCycleDuration = duration;
@@ -89,7 +89,7 @@ public final class StubPluginFactoryBuilder {
      * Returns an instance of StubPluginFactory created from the fields set on this builder.
      *
      * @return A {@link StubPluginFactory}
-     * @since 2.0
+     * @since 2.0.0
      */
     public StubPluginFactory build() {
       return new StubPluginFactoryAdapter(
