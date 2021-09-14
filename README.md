@@ -2,7 +2,7 @@
 
 ## Overview
 
-The **Keyple Plugin Stub Java Library** is an addon to allow an application using Keyple to interact with virtual readers and emulated smart cards.
+The **Keyple Plugin Stub Java Library** is an add-on to allow an application using Keyple to interact with virtual readers and emulated smart cards.
 
 ## Documentation & Contribution Guide
 
