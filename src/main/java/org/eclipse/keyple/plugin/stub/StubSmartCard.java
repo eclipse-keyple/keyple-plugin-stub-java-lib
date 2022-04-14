@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.regex.Pattern;
 import org.eclipse.keyple.core.plugin.CardIOException;
 import org.eclipse.keyple.core.util.Assert;
-import org.eclipse.keyple.core.util.ByteArrayUtil;
+import org.eclipse.keyple.core.util.HexUtil;
 
 /**
  * Simulated smart card that can be inserted into a {@link StubReader}. Use the {@link Builder} to
@@ -115,14 +115,14 @@ public class StubSmartCard {
     }
 
     // convert apduIn to hex
-    String hexApdu = ByteArrayUtil.toHex(apduIn);
+    String hexApdu = HexUtil.toHex(apduIn);
 
     // return matching hex response if the provided APDU matches the regex
     Pattern p;
     for (Map.Entry<String, String> hexCommand : hexCommands.entrySet()) {
       p = Pattern.compile(hexCommand.getKey());
       if (p.matcher(hexApdu).matches()) {
-        return ByteArrayUtil.fromHex(hexCommand.getValue());
+        return HexUtil.toByteArray(hexCommand.getValue());
       }
     }
 
@@ -139,7 +139,7 @@ public class StubSmartCard {
   public String toString() {
     return "StubSmartCard{"
         + "powerOnData="
-        + ByteArrayUtil.toHex(powerOnData)
+        + HexUtil.toHex(powerOnData)
         + ", cardProtocol='"
         + cardProtocol
         + '\''

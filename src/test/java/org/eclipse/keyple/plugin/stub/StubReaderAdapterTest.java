@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.eclipse.keyple.plugin.stub.StubSmartCardTest.*;
 
 import org.eclipse.keyple.core.plugin.CardIOException;
-import org.eclipse.keyple.core.util.ByteArrayUtil;
+import org.eclipse.keyple.core.util.HexUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,16 +49,16 @@ public class StubReaderAdapterTest {
     adapter.activateProtocol(PROTOCOL);
     adapter.insertCard(card);
     assertThat(adapter.getSmartcard()).isEqualTo(card);
-    assertThat(adapter.getPowerOnData()).isEqualTo(ByteArrayUtil.toHex(card.getPowerOnData()));
+    assertThat(adapter.getPowerOnData()).isEqualTo(HexUtil.toHex(card.getPowerOnData()));
     assertThat(adapter.isPhysicalChannelOpen()).isEqualTo(card.isPhysicalChannelOpen());
     assertThat(adapter.checkCardPresence()).isTrue();
     assertThat(adapter.isCurrentProtocol(PROTOCOL)).isTrue();
-    assertThat(adapter.transmitApdu(ByteArrayUtil.fromHex(commandHex)))
-        .isEqualTo(ByteArrayUtil.fromHex(responseHex));
+    assertThat(adapter.transmitApdu(HexUtil.toByteArray(commandHex)))
+        .isEqualTo(HexUtil.toByteArray(responseHex));
   }
 
   @Test
-  public void insert_card_without_activated_protocol_return_null() throws CardIOException {
+  public void insert_card_without_activated_protocol_return_null() {
     adapter.activateProtocol(PROTOCOL);
     adapter.deactivateProtocol(PROTOCOL);
     adapter.insertCard(card);
@@ -66,7 +66,7 @@ public class StubReaderAdapterTest {
   }
 
   @Test
-  public void remove_inserted_card() throws CardIOException {
+  public void remove_inserted_card() {
     adapter.activateProtocol(PROTOCOL);
     adapter.insertCard(card);
     assertThat(adapter.getSmartcard()).isEqualTo(card);
@@ -75,7 +75,7 @@ public class StubReaderAdapterTest {
   }
 
   @Test
-  public void insert_card_with_inserted_card_does_nothing() throws CardIOException {
+  public void insert_card_with_inserted_card_does_nothing() {
     StubSmartCard card2 = buildCard(PROTOCOL);
     adapter.activateProtocol(PROTOCOL);
     adapter.insertCard(card);
@@ -84,7 +84,7 @@ public class StubReaderAdapterTest {
   }
 
   @Test
-  public void test_open_close_channel() throws CardIOException {
+  public void test_open_close_channel() {
     adapter.activateProtocol(PROTOCOL);
     adapter.insertCard(card);
     assertThat(adapter.isPhysicalChannelOpen()).isFalse();
@@ -97,12 +97,12 @@ public class StubReaderAdapterTest {
   @Test(expected = CardIOException.class)
   public void op_without_card() throws CardIOException {
     assertThat(adapter.isCurrentProtocol("any")).isFalse();
-    adapter.transmitApdu(ByteArrayUtil.fromHex(commandHex)); // trhow ex
+    adapter.transmitApdu(HexUtil.toByteArray(commandHex)); // throw ex
   }
 
   private StubSmartCard buildCard(String protocol) {
     return StubSmartCard.builder()
-        .withPowerOnData(ByteArrayUtil.fromHex("0000"))
+        .withPowerOnData(HexUtil.toByteArray("0000"))
         .withProtocol(protocol)
         .withSimulatedCommand(commandHex, responseHex)
         .build();

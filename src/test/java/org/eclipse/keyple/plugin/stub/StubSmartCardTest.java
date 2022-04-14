@@ -14,7 +14,7 @@ package org.eclipse.keyple.plugin.stub;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.eclipse.keyple.core.plugin.CardIOException;
-import org.eclipse.keyple.core.util.ByteArrayUtil;
+import org.eclipse.keyple.core.util.HexUtil;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -33,26 +33,26 @@ public class StubSmartCardTest {
   }
 
   @Test
-  public void sendApdu_adpuExists_sendResponse() throws CardIOException {
-    byte[] apduResponse = card.processApdu(ByteArrayUtil.fromHex(commandHex));
-    assertThat(apduResponse).isEqualTo(ByteArrayUtil.fromHex(responseHex));
+  public void sendApdu_apduExists_sendResponse() throws CardIOException {
+    byte[] apduResponse = card.processApdu(HexUtil.toByteArray(commandHex));
+    assertThat(apduResponse).isEqualTo(HexUtil.toByteArray(responseHex));
   }
 
   @Test
-  public void sendApdu_adpuRegexpExists_sendResponse() throws CardIOException {
+  public void sendApdu_apduRegexpExists_sendResponse() throws CardIOException {
     card =
         StubSmartCard.builder()
             .withPowerOnData(powerOnData)
             .withProtocol(protocol)
             .withSimulatedCommand(commandHexRegexp, responseHex)
             .build();
-    byte[] apduResponse = card.processApdu(ByteArrayUtil.fromHex(commandHex));
-    assertThat(apduResponse).isEqualTo(ByteArrayUtil.fromHex(responseHex));
+    byte[] apduResponse = card.processApdu(HexUtil.toByteArray(commandHex));
+    assertThat(apduResponse).isEqualTo(HexUtil.toByteArray(responseHex));
   }
 
   @Test(expected = CardIOException.class)
-  public void sendApdu_adpuNotExists_sendException() throws CardIOException {
-    card.processApdu(ByteArrayUtil.fromHex("excp"));
+  public void sendApdu_apduNotExists_sendException() throws CardIOException {
+    card.processApdu(HexUtil.toByteArray("excp"));
   }
 
   @Test
