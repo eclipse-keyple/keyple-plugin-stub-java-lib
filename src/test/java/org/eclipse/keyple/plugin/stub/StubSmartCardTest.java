@@ -55,6 +55,48 @@ public class StubSmartCardTest {
     card.processApdu(HexUtil.toByteArray("excp"));
   }
 
+  @Test(expected = CardIOException.class)
+  public void
+      shouldNotBeAbleTo_build_a_stubSmartCard_withApduResponseProvider_and_withSimulatedCommand()
+          throws CardIOException {
+    card =
+        StubSmartCard.builder()
+            .withPowerOnData(powerOnData)
+            .withProtocol(protocol)
+            .withSimulatedCommand(commandHexRegexp, responseHex)
+            .withApduResponseProvider(
+                new ApduResponseProvider() {
+                  @Override
+                  public String getResponseFromRequest(String apduRequest) {
+                    return "response";
+                  }
+                })
+            .build();
+  }
+
+  @Test
+  public void shouldUse_a_apduResponseProvider_to_sendResponse() throws CardIOException {
+    card =
+        StubSmartCard.builder()
+            .withPowerOnData(powerOnData)
+            .withProtocol(protocol)
+            .withApduResponseProvider(
+                new ApduResponseProvider() {
+                  @Override
+                  public String getResponseFromRequest(String apduRequest) throws CardIOException {
+                    if (apduRequest.equals(commandHex)) {
+                      return responseHex;
+                    } else {
+                      throw new CardIOException(
+                          "No response available for this request: " + apduRequest);
+                    }
+                  }
+                })
+            .build();
+    byte[] apduResponse = card.processApdu(HexUtil.toByteArray(commandHex));
+    assertThat(apduResponse).isEqualTo(HexUtil.toByteArray(responseHex));
+  }
+
   @Test
   public void open_close_physical_channel() {
     assertThat(card.isPhysicalChannelOpen()).isFalse();
