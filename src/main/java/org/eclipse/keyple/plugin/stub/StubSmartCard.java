@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import org.eclipse.keyple.core.plugin.CardIOException;
 import org.eclipse.keyple.core.util.Assert;
 import org.eclipse.keyple.core.util.HexUtil;
+import org.eclipse.keyple.plugin.stub.spi.ApduResponseProviderSpi;
 
 /**
  * Simulated smart card that can be inserted into a {@link StubReader}. Use the {@link Builder} to
@@ -30,20 +31,28 @@ public class StubSmartCard {
   private final String cardProtocol;
   private boolean isPhysicalChannelOpen;
   private final Map<String, String> hexCommands;
+  private final ApduResponseProviderSpi apduResponseProvider;
 
   /**
    * (private) <br>
-   * Create a simulated smart card with mandatory parameters
+   * Create a simulated smart card with mandatory parameters The response APDU can be provided using
+   * <code>apduResponseProvider</code> if it is not null or <code>hexCommands</code> by default.
    *
    * @param powerOnData (non nullable) power-on data of the card
    * @param cardProtocol (non nullable) card protocol
    * @param hexCommands (non nullable) set of simulated commands
+   * @param apduResponseProvider (nullable) an external provider of simulated commands
    * @since 2.0.0
    */
-  private StubSmartCard(byte[] powerOnData, String cardProtocol, Map<String, String> hexCommands) {
+  private StubSmartCard(
+      byte[] powerOnData,
+      String cardProtocol,
+      Map<String, String> hexCommands,
+      ApduResponseProviderSpi apduResponseProvider) {
     this.powerOnData = powerOnData;
     this.cardProtocol = cardProtocol;
     this.hexCommands = hexCommands;
+    this.apduResponseProvider = apduResponseProvider;
     isPhysicalChannelOpen = false;
   }
 
@@ -117,12 +126,19 @@ public class StubSmartCard {
     // convert apduIn to hex
     String hexApdu = HexUtil.toHex(apduIn);
 
-    // return matching hex response if the provided APDU matches the regex
-    Pattern p;
-    for (Map.Entry<String, String> hexCommand : hexCommands.entrySet()) {
-      p = Pattern.compile(hexCommand.getKey());
-      if (p.matcher(hexApdu).matches()) {
-        return HexUtil.toByteArray(hexCommand.getValue());
+    if (apduResponseProvider != null) {
+      String responseFromRequest = apduResponseProvider.getResponseFromRequest(hexApdu);
+      if (responseFromRequest != null) {
+        return HexUtil.toByteArray(responseFromRequest);
+      }
+    } else if (hexCommands != null) {
+      // return matching hex response if the provided APDU matches the regex
+      Pattern p;
+      for (Map.Entry<String, String> hexCommand : hexCommands.entrySet()) {
+        p = Pattern.compile(hexCommand.getKey());
+        if (p.matcher(hexApdu).matches()) {
+          return HexUtil.toByteArray(hexCommand.getValue());
+        }
       }
     }
 
@@ -165,10 +181,12 @@ public class StubSmartCard {
    *
    * @since 2.0.0
    */
-  public static class Builder implements PowerOnDataStep, ProtocolStep, CommandStep {
+  public static class Builder
+      implements PowerOnDataStep, ProtocolStep, CommandStep, BuildStep, SimulatedCommandStep {
 
     private byte[] powerOnData;
     private String cardProtocol;
+    private ApduResponseProviderSpi apduResponseProvider;
     private final Map<String, String> hexCommands;
 
     private Builder() {
@@ -181,7 +199,7 @@ public class StubSmartCard {
      * @since 2.0.0
      */
     @Override
-    public Builder withSimulatedCommand(String command, String response) {
+    public SimulatedCommandStep withSimulatedCommand(String command, String response) {
       Assert.getInstance().notNull(command, "command").notNull(response, "response");
       // add commands without space
       hexCommands.put(command.trim(), response.trim());
@@ -195,7 +213,7 @@ public class StubSmartCard {
      */
     @Override
     public StubSmartCard build() {
-      return new StubSmartCard(powerOnData, cardProtocol, hexCommands);
+      return new StubSmartCard(powerOnData, cardProtocol, hexCommands, apduResponseProvider);
     }
 
     /**
@@ -215,9 +233,20 @@ public class StubSmartCard {
      * @since 2.0.0
      */
     @Override
-    public Builder withProtocol(String protocol) {
+    public CommandStep withProtocol(String protocol) {
       Assert.getInstance().notNull(protocol, "Protocol");
       this.cardProtocol = protocol;
+      return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @since 2.0.0
+     */
+    @Override
+    public BuildStep withApduResponseProvider(ApduResponseProviderSpi apduResponseProvider) {
+      this.apduResponseProvider = apduResponseProvider;
       return this;
     }
   }
@@ -254,8 +283,48 @@ public class StubSmartCard {
      * @return next step of builder
      * @since 2.0.0
      */
-    CommandStep withSimulatedCommand(String command, String response);
+    SimulatedCommandStep withSimulatedCommand(String command, String response);
 
+    /**
+     * Provide simulated command/response to the {@link StubSmartCard} using a custom provider
+     * implementing of {@link ApduResponseProviderSpi}.
+     *
+     * @param apduResponseProvider hexadecimal command to respond to (can be a regexp to match
+     *     multiple apdu)
+     * @return next step of builder
+     * @since 2.0.0
+     */
+    BuildStep withApduResponseProvider(ApduResponseProviderSpi apduResponseProvider);
+
+    /**
+     * Build the {@link StubSmartCard}
+     *
+     * @return new instance a StubSmartCard
+     */
+    StubSmartCard build();
+  }
+
+  public interface SimulatedCommandStep {
+    /**
+     * Add simulated command/response to the {@link StubSmartCard} to build. Command and response
+     * should be hexadecimal.
+     *
+     * @param command hexadecimal command to respond to (can be a regexp to match multiple apdu)
+     * @param response hexadecimal response
+     * @return next step of builder
+     * @since 2.0.0
+     */
+    SimulatedCommandStep withSimulatedCommand(String command, String response);
+
+    /**
+     * Build the {@link StubSmartCard}
+     *
+     * @return new instance a StubSmartCard
+     */
+    StubSmartCard build();
+  }
+
+  public interface BuildStep {
     /**
      * Build the {@link StubSmartCard}
      *
