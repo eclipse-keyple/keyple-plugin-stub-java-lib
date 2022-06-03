@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.eclipse.keyple.core.plugin.CardIOException;
 import org.eclipse.keyple.core.util.HexUtil;
+import org.eclipse.keyple.plugin.stub.spi.ApduResponseProviderSpi;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -53,6 +54,24 @@ public class StubSmartCardTest {
   @Test(expected = CardIOException.class)
   public void sendApdu_apduNotExists_sendException() throws CardIOException {
     card.processApdu(HexUtil.toByteArray("excp"));
+  }
+
+  @Test
+  public void shouldUse_a_apduResponseProvider_to_sendResponse() throws CardIOException {
+    card =
+        StubSmartCard.builder()
+            .withPowerOnData(powerOnData)
+            .withProtocol(protocol)
+            .withApduResponseProvider(
+                new ApduResponseProviderSpi() {
+                  @Override
+                  public String getResponseFromRequest(String apduRequest) {
+                    return (apduRequest.equals(commandHex)) ? responseHex : null;
+                  }
+                })
+            .build();
+    byte[] apduResponse = card.processApdu(HexUtil.toByteArray(commandHex));
+    assertThat(apduResponse).isEqualTo(HexUtil.toByteArray(responseHex));
   }
 
   @Test
