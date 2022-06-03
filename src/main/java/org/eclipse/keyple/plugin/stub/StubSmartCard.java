@@ -242,7 +242,7 @@ public class StubSmartCard {
     /**
      * {@inheritDoc}
      *
-     * @since 2.0.0
+     * @since 2.1.0
      */
     @Override
     public BuildStep withApduResponseProvider(ApduResponseProviderSpi apduResponseProvider) {
@@ -292,7 +292,7 @@ public class StubSmartCard {
      * @param apduResponseProvider hexadecimal command to respond to (can be a regexp to match
      *     multiple apdu)
      * @return next step of builder
-     * @since 2.0.0
+     * @since 2.1.0
      */
     BuildStep withApduResponseProvider(ApduResponseProviderSpi apduResponseProvider);
 
@@ -312,7 +312,7 @@ public class StubSmartCard {
      * @param command hexadecimal command to respond to (can be a regexp to match multiple apdu)
      * @param response hexadecimal response
      * @return next step of builder
-     * @since 2.0.0
+     * @since 2.1.0
      */
     SimulatedCommandStep withSimulatedCommand(String command, String response);
 
@@ -329,6 +329,7 @@ public class StubSmartCard {
      * Build the {@link StubSmartCard}
      *
      * @return new instance a StubSmartCard
+     * @since 2.1.0
      */
     StubSmartCard build();
   }

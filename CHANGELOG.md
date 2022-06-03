@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - "CHANGELOG.md" file (issue [eclipse/keyple#6]).
 - CI: Forbid the publication of a version already released (issue [#7]).
+- New way of mocking APDU responses for a `StubSmartCard` using a provider (issue [#10]).
 ### Upgraded
 - "Keyple Util Library" to version `2.1.0` by removing the use of deprecated methods.
 
@@ -19,6 +20,7 @@ It also brings many major API changes.
 [unreleased]: https://github.com/eclipse/keyple-plugin-stub-java-lib/compare/2.0.0...HEAD
 [2.0.0]: https://github.com/eclipse/keyple-plugin-stub-java-lib/releases/tag/2.0.0
 
+[#10]: https://github.com/eclipse/keyple-plugin-stub-java-lib/issues/10
 [#7]: https://github.com/eclipse/keyple-plugin-stub-java-lib/issues/7
 
 [eclipse/keyple#6]: https://github.com/eclipse/keyple/issues/6
