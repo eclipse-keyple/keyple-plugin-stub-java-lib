@@ -26,7 +26,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":1,"i1":1,"i2":2,"i3":2,"i4":1,"i5":1,"i6":2,"i7":2,"i8":1,"i9":2,"i10":2,"i11":1,"i12":1,"i13":1};
+var data = {"i0":1,"i1":1,"i2":1,"i3":2,"i4":2,"i5":1,"i6":1,"i7":2,"i8":2,"i9":1,"i10":2,"i11":2,"i12":1,"i13":1,"i14":1,"i15":1,"i16":1};
 var tabs = {65535:["t0","All Classes"],1:["t1","Interface Summary"],2:["t2","Class Summary"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -51,7 +51,7 @@ loadScripts(document, 'script');</script>
 </a>
 <ul class="navList" title="Navigation">
 <li><a href="index.html">Overview</a></li>
-<li><a href="org/eclipse/keyple/plugin/stub/package-summary.html">Package</a></li>
+<li>Package</li>
 <li>Class</li>
 <li>Use</li>
 <li><a href="overview-tree.html">Tree</a></li>
@@ -112,85 +112,99 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/spi/ApduResponseProviderSpi.html" title="interface in org.eclipse.keyple.plugin.stub.spi">ApduResponseProviderSpi</a></td>
+<th class="colLast" scope="row">
+<div class="block">This interface is used to provide APDU responses according to an APDU request.</div>
+</th>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPlugin.html" title="interface in org.eclipse.keyple.plugin.stub">StubPlugin</a></td>
 <th class="colLast" scope="row">
 <div class="block">Specific methods of the Stub Plugin.</div>
 </th>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPluginFactory.html" title="interface in org.eclipse.keyple.plugin.stub">StubPluginFactory</a></td>
 <th class="colLast" scope="row">
 <div class="block">Stub specific <code>KeyplePluginExtensionFactory</code> to be provided to the Keyple SmartCard service
  to register the Stub plugin, built by <a href="org/eclipse/keyple/plugin/stub/StubPluginFactoryBuilder.html" title="class in org.eclipse.keyple.plugin.stub"><code>StubPluginFactoryBuilder</code></a>.</div>
 </th>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPluginFactoryBuilder.html" title="class in org.eclipse.keyple.plugin.stub">StubPluginFactoryBuilder</a></td>
 <th class="colLast" scope="row">
 <div class="block">Builds instances of <a href="org/eclipse/keyple/plugin/stub/StubPluginFactory.html" title="interface in org.eclipse.keyple.plugin.stub"><code>StubPluginFactory</code></a>.</div>
 </th>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPluginFactoryBuilder.Builder.html" title="class in org.eclipse.keyple.plugin.stub">StubPluginFactoryBuilder.Builder</a></td>
 <th class="colLast" scope="row">
 <div class="block">Builder to build a <a href="org/eclipse/keyple/plugin/stub/StubPluginFactory.html" title="interface in org.eclipse.keyple.plugin.stub"><code>StubPluginFactory</code></a>.</div>
 </th>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPoolPlugin.html" title="interface in org.eclipse.keyple.plugin.stub">StubPoolPlugin</a></td>
 <th class="colLast" scope="row">
 <div class="block">Simulates a @<code>PoolPluginSpi</code> with <a href="org/eclipse/keyple/plugin/stub/StubReader.html" title="interface in org.eclipse.keyple.plugin.stub"><code>StubReader</code></a> and
  <a href="org/eclipse/keyple/plugin/stub/StubSmartCard.html" title="class in org.eclipse.keyple.plugin.stub"><code>StubSmartCard</code></a>.</div>
 </th>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPoolPluginFactory.html" title="interface in org.eclipse.keyple.plugin.stub">StubPoolPluginFactory</a></td>
 <th class="colLast" scope="row">
 <div class="block">Stub specific <code>KeyplePluginExtensionFactory</code> to be provided to the Keyple SmartCard service
  to register the Stub Pool plugin, built by <a href="org/eclipse/keyple/plugin/stub/StubPoolPluginFactoryBuilder.html" title="class in org.eclipse.keyple.plugin.stub"><code>StubPoolPluginFactoryBuilder</code></a>.</div>
 </th>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPoolPluginFactoryBuilder.html" title="class in org.eclipse.keyple.plugin.stub">StubPoolPluginFactoryBuilder</a></td>
 <th class="colLast" scope="row">
 <div class="block">Builds instances of <a href="org/eclipse/keyple/plugin/stub/StubPoolPluginFactory.html" title="interface in org.eclipse.keyple.plugin.stub"><code>StubPoolPluginFactory</code></a>.</div>
 </th>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubPoolPluginFactoryBuilder.Builder.html" title="class in org.eclipse.keyple.plugin.stub">StubPoolPluginFactoryBuilder.Builder</a></td>
 <th class="colLast" scope="row">
 <div class="block">Builder to build a <a href="org/eclipse/keyple/plugin/stub/StubPoolPluginFactory.html" title="interface in org.eclipse.keyple.plugin.stub"><code>StubPoolPluginFactory</code></a>.</div>
 </th>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubReader.html" title="interface in org.eclipse.keyple.plugin.stub">StubReader</a></td>
 <th class="colLast" scope="row">
 <div class="block">The Stub Reader supports programmatically the insertion and removal of <a href="org/eclipse/keyple/plugin/stub/StubSmartCard.html" title="class in org.eclipse.keyple.plugin.stub"><code>StubSmartCard</code></a> <br>
  To invoke those methods use Reader#getExtension(StubReader.class) from the Reader class.</div>
 </th>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.html" title="class in org.eclipse.keyple.plugin.stub">StubSmartCard</a></td>
 <th class="colLast" scope="row">
 <div class="block">Simulated smart card that can be inserted into a <a href="org/eclipse/keyple/plugin/stub/StubReader.html" title="interface in org.eclipse.keyple.plugin.stub"><code>StubReader</code></a>.</div>
 </th>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.Builder.html" title="class in org.eclipse.keyple.plugin.stub">StubSmartCard.Builder</a></td>
 <th class="colLast" scope="row">
 <div class="block">Builder class for <a href="org/eclipse/keyple/plugin/stub/StubSmartCard.html" title="class in org.eclipse.keyple.plugin.stub"><code>StubSmartCard</code></a>.</div>
 </th>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.CommandStep.html" title="interface in org.eclipse.keyple.plugin.stub">StubSmartCard.CommandStep</a></td>
-<th class="colLast" scope="row">&nbsp;</th>
-</tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.PowerOnDataStep.html" title="interface in org.eclipse.keyple.plugin.stub">StubSmartCard.PowerOnDataStep</a></td>
+<td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.BuildStep.html" title="interface in org.eclipse.keyple.plugin.stub">StubSmartCard.BuildStep</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 <tr id="i13" class="rowColor">
+<td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.CommandStep.html" title="interface in org.eclipse.keyple.plugin.stub">StubSmartCard.CommandStep</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.PowerOnDataStep.html" title="interface in org.eclipse.keyple.plugin.stub">StubSmartCard.PowerOnDataStep</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.ProtocolStep.html" title="interface in org.eclipse.keyple.plugin.stub">StubSmartCard.ProtocolStep</a></td>
+<th class="colLast" scope="row">&nbsp;</th>
+</tr>
+<tr id="i16" class="altColor">
+<td class="colFirst"><a href="org/eclipse/keyple/plugin/stub/StubSmartCard.SimulatedCommandStep.html" title="interface in org.eclipse.keyple.plugin.stub">StubSmartCard.SimulatedCommandStep</a></td>
 <th class="colLast" scope="row">&nbsp;</th>
 </tr>
 </table>
@@ -210,7 +224,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <ul class="navList" title="Navigation">
 <li><a href="index.html">Overview</a></li>
-<li><a href="org/eclipse/keyple/plugin/stub/package-summary.html">Package</a></li>
+<li>Package</li>
 <li>Class</li>
 <li>Use</li>
 <li><a href="overview-tree.html">Tree</a></li>
