@@ -16,6 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.eclipse.keyple.core.plugin.PluginIOException;
 import org.eclipse.keyple.core.plugin.spi.ObservablePluginSpi;
 import org.eclipse.keyple.core.plugin.spi.PoolPluginSpi;
+import org.eclipse.keyple.core.plugin.spi.reader.PoolReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.ReaderSpi;
 import org.eclipse.keyple.core.util.Assert;
 import org.eclipse.keyple.plugin.stub.StubPoolPluginFactoryAdapter.StubPoolReaderConfiguration;
@@ -89,7 +90,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * @since 2.0.0
    */
   @Override
-  public ReaderSpi allocateReader(String readerGroupReference) throws PluginIOException {
+  public PoolReaderSpi allocateReader(String readerGroupReference) throws PluginIOException {
     Set<String> candidateReadersName;
 
     if (readerGroupReference == null) {
@@ -103,7 +104,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
     // find the first non allocated reader among candidates
     for (String readerName : candidateReadersName) {
       if (allocatedReaders.add(readerName)) {
-        return stubPluginAdapter.searchReader(readerName);
+        return (PoolReaderSpi) stubPluginAdapter.searchReader(readerName);
       }
     }
 
