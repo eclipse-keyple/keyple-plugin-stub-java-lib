@@ -13,15 +13,12 @@ package org.eclipse.keyple.plugin.stub;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import org.eclipse.keyple.core.plugin.CardIOException;
-import org.eclipse.keyple.core.plugin.TaskCanceledException;
 import org.eclipse.keyple.core.plugin.spi.reader.ConfigurableReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.PoolReaderSpi;
 import org.eclipse.keyple.core.plugin.spi.reader.observable.ObservableReaderSpi;
-import org.eclipse.keyple.core.plugin.spi.reader.observable.state.insertion.WaitForCardInsertionNonBlockingSpi;
-import org.eclipse.keyple.core.plugin.spi.reader.observable.state.processing.WaitForCardRemovalDuringProcessingBlockingSpi;
-import org.eclipse.keyple.core.plugin.spi.reader.observable.state.removal.WaitForCardRemovalNonBlockingSpi;
+import org.eclipse.keyple.core.plugin.spi.reader.observable.state.insertion.CardInsertionWaiterNonBlockingSpi;
+import org.eclipse.keyple.core.plugin.spi.reader.observable.state.removal.CardRemovalWaiterNonBlockingSpi;
 import org.eclipse.keyple.core.util.Assert;
 import org.eclipse.keyple.core.util.HexUtil;
 import org.slf4j.Logger;
@@ -38,9 +35,8 @@ final class StubReaderAdapter
         ConfigurableReaderSpi,
         PoolReaderSpi,
         ObservableReaderSpi,
-        WaitForCardInsertionNonBlockingSpi,
-        WaitForCardRemovalDuringProcessingBlockingSpi,
-        WaitForCardRemovalNonBlockingSpi {
+        CardInsertionWaiterNonBlockingSpi,
+        CardRemovalWaiterNonBlockingSpi {
 
   private static final Logger logger = LoggerFactory.getLogger(StubReaderAdapter.class);
 
@@ -49,7 +45,6 @@ final class StubReaderAdapter
   private final Set<String> activatedProtocols;
 
   private StubSmartCard smartCard;
-  private final AtomicBoolean continueWaitForCardRemovalTask = new AtomicBoolean();
 
   /**
    * (package-private)<br>
@@ -276,33 +271,11 @@ final class StubReaderAdapter
   /**
    * {@inheritDoc}
    *
-   * @since 2.0.0
+   * @since 2.2.0
    */
   @Override
-  public void waitForCardRemovalDuringProcessing() throws TaskCanceledException {
-    continueWaitForCardRemovalTask.set(true);
-    while (smartCard != null
-        && continueWaitForCardRemovalTask.get()
-        && !Thread.currentThread().isInterrupted()) {
-      try {
-        Thread.sleep(100);
-      } catch (InterruptedException e) {
-        Thread.currentThread().interrupt();
-      }
-    }
-    if (!continueWaitForCardRemovalTask.get()) {
-      throw new TaskCanceledException("Wait for card removal task cancelled");
-    }
-  }
-
-  /**
-   * {@inheritDoc}
-   *
-   * @since 2.0.0
-   */
-  @Override
-  public void stopWaitForCardRemovalDuringProcessing() {
-    continueWaitForCardRemovalTask.set(false);
+  public Object getSelectedSmartCard() {
+    return null;
   }
 
   /**
@@ -311,7 +284,17 @@ final class StubReaderAdapter
    * @since 2.2.0
    */
   @Override
-  public Object getSelectedSmartCard() {
-    return null;
+  public int getCardInsertionMonitoringSleepDuration() {
+    return 0;
+  }
+
+  /**
+   * {@inheritDoc}
+   *
+   * @since 2.2.0
+   */
+  @Override
+  public int getCardRemovalMonitoringSleepDuration() {
+    return 0;
   }
 }

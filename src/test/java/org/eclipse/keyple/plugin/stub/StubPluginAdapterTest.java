@@ -40,8 +40,8 @@ public class StubPluginAdapterTest {
   public void initPlugin_withOneReader() throws PluginIOException, ReaderIOException {
     readerConfigurations.add(new StubReaderConfiguration(NAME, true, card));
     pluginAdapter = new StubPluginAdapter(NAME, readerConfigurations, 0);
-    assertThat(pluginAdapter.searchAvailableReaders().size()).isEqualTo(1);
-    assertThat(pluginAdapter.searchAvailableReaderNames().size()).isEqualTo(1);
+    assertThat(pluginAdapter.searchAvailableReaders()).hasSize(1);
+    assertThat(pluginAdapter.searchAvailableReaderNames()).hasSize(1);
     assertThat(pluginAdapter.searchReader(NAME)).isNotNull();
     assertThat(pluginAdapter.searchReader(NAME).isContactless()).isTrue();
     assertThat(pluginAdapter.searchReader(NAME).checkCardPresence()).isTrue();
@@ -50,14 +50,14 @@ public class StubPluginAdapterTest {
   @Test
   public void plugReader_should_create_reader() throws PluginIOException {
     pluginAdapter.plugReader(NAME, true, card);
-    assertThat(pluginAdapter.searchAvailableReaders().size()).isEqualTo(1);
+    assertThat(pluginAdapter.searchAvailableReaders()).hasSize(1);
   }
 
   @Test
   public void unplugReader_should_remove_reader() throws PluginIOException {
     pluginAdapter.plugReader(NAME, true, card);
-    assertThat(pluginAdapter.searchAvailableReaders().size()).isEqualTo(1);
+    assertThat(pluginAdapter.searchAvailableReaders()).hasSize(1);
     pluginAdapter.unplugReader(NAME);
-    assertThat(pluginAdapter.searchAvailableReaders().size()).isEqualTo(0);
+    assertThat(pluginAdapter.searchAvailableReaders()).isEmpty();
   }
 }

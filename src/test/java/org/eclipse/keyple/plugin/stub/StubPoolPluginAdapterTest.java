@@ -46,14 +46,14 @@ public class StubPoolPluginAdapterTest {
     readerConfigurations.add(new StubPoolReaderConfiguration(group1, READER_NAME_2, card));
 
     pluginPoolAdapter = new StubPoolPluginAdapter(READER_NAME, readerConfigurations, 0);
-    assertThat(pluginPoolAdapter.searchAvailableReaders().size()).isEqualTo(2);
+    assertThat(pluginPoolAdapter.searchAvailableReaders()).hasSize(2);
     assertThat(pluginPoolAdapter.searchReader(READER_NAME).isContactless()).isFalse();
   }
 
   @Test
   public void plugReader_should_create_reader() throws PluginIOException {
     pluginPoolAdapter.plugPoolReader(group1, READER_NAME, card);
-    assertThat(pluginPoolAdapter.searchAvailableReaders().size()).isEqualTo(1);
+    assertThat(pluginPoolAdapter.searchAvailableReaders()).hasSize(1);
   }
 
   @Test
@@ -75,7 +75,7 @@ public class StubPoolPluginAdapterTest {
     plugReader_should_create_reader();
     pluginPoolAdapter.plugPoolReader(group2, READER_NAME_2, card);
     pluginPoolAdapter.unplugPoolReader(READER_NAME);
-    assertThat(pluginPoolAdapter.searchAvailableReaders().size()).isEqualTo(1);
+    assertThat(pluginPoolAdapter.searchAvailableReaders()).hasSize(1);
   }
 
   @Test
@@ -83,7 +83,7 @@ public class StubPoolPluginAdapterTest {
     plugReader_should_create_reader();
     pluginPoolAdapter.plugPoolReader(group1, READER_NAME_2, card);
     pluginPoolAdapter.unplugPoolReaders(group1);
-    assertThat(pluginPoolAdapter.searchAvailableReaders().size()).isEqualTo(0);
+    assertThat(pluginPoolAdapter.searchAvailableReaders()).isEmpty();
   }
 
   @Test(expected = PluginIOException.class)

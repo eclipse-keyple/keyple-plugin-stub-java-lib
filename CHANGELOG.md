@@ -10,8 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - CI: code coverage report when releasing.
 ### Upgraded
-- "Keyple Plugin API" to version `2.1.0`
-- "Keyple Util Library" to version `2.3.1`
+- Keyple Plugin API `2.0.0` -> `2.2.0`
+- Keyple Util Library `2.1.0` -> `2.3.1`
 
 ## [2.1.0] - 2022-06-03
 ### Added
