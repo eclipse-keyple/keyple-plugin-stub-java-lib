@@ -6,8 +6,8 @@ This content is produced and maintained by the Eclipse Keyple project.
  
 ## Supported platforms
 
-* Java SE 1.6 compact2
-* Android 4.4 KitKat API level 19
+* Java 1.8
+* Android 7.0 Nougat API Level 24
 
 ## Trademarks
  
@@ -31,7 +31,7 @@ SPDX-License-Identifier: EPL-2.0
    
 ## Third-party Content
 
-SLF4J API (1.7.32)
+SLF4J API
 
 * License: [MIT](https://spdx.org/licenses/MIT.html)
 * Project: http://www.slf4j.org

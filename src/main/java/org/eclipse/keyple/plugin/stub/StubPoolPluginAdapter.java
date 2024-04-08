@@ -47,8 +47,8 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
       int monitoringCycleDuration) {
     this.stubPluginAdapter =
         new StubPluginAdapter(name, readerConfigurations, monitoringCycleDuration);
-    this.readerToGroup = new ConcurrentHashMap<String, String>();
-    this.allocatedReaders = new HashSet<String>();
+    this.readerToGroup = new ConcurrentHashMap<>();
+    this.allocatedReaders = new HashSet<>();
     for (StubPoolReaderConfiguration readerConfiguration : readerConfigurations) {
       readerToGroup.put(readerConfiguration.getName(), readerConfiguration.getGroupReference());
     }
@@ -81,7 +81,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    */
   @Override
   public SortedSet<String> getReaderGroupReferences() {
-    return new TreeSet<String>(readerToGroup.values());
+    return new TreeSet<>(readerToGroup.values());
   }
 
   /**
@@ -229,7 +229,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
    * @return collection of reader names
    */
   private Set<String> listReadersByGroup(String aGroupReference) {
-    Set<String> readers = new HashSet<String>();
+    Set<String> readers = new HashSet<>();
     // find the reader in the readerPool
     for (Map.Entry<String, String> entry : readerToGroup.entrySet()) {
       String readerName = entry.getKey();
