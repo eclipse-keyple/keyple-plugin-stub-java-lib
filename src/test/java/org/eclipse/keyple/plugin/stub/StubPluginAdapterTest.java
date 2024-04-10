@@ -27,8 +27,7 @@ public class StubPluginAdapterTest {
   private StubPluginAdapter pluginAdapter;
   private StubSmartCard card;
   private final String NAME = "name";
-  private Set<StubReaderConfiguration> readerConfigurations =
-      new HashSet<StubReaderConfiguration>();
+  private Set<StubReaderConfiguration> readerConfigurations = new HashSet<>();
 
   @Before
   public void setup() {
