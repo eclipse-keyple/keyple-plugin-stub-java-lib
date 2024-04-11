@@ -54,7 +54,7 @@ public final class StubPoolPluginFactoryBuilder {
 
     /** (private) Constructs an empty Builder. */
     private Builder() {
-      readerConfigurations = new HashSet<StubPoolReaderConfiguration>();
+      readerConfigurations = new HashSet<>();
       monitoringCycleDuration = 0;
     }
 

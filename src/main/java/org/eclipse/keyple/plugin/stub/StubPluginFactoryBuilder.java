@@ -52,7 +52,7 @@ public final class StubPluginFactoryBuilder {
 
     /** (private) Constructs an empty Builder. */
     private Builder() {
-      readerConfigurations = new HashSet<StubPluginFactoryAdapter.StubReaderConfiguration>();
+      readerConfigurations = new HashSet<>();
       monitoringCycleDuration = 0;
     }
 

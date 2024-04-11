@@ -58,7 +58,7 @@ final class StubReaderAdapter
   StubReaderAdapter(String name, Boolean isContactLess, StubSmartCard card) {
     this.name = name;
     this.isContactLess = isContactLess;
-    this.activatedProtocols = new HashSet<String>();
+    this.activatedProtocols = new HashSet<>();
     this.smartCard = card;
   }
 
@@ -76,6 +76,7 @@ final class StubReaderAdapter
     if (logger.isTraceEnabled())
       logger.trace("Detection has been started on reader {}", this.getName());
   }
+
   /**
    * {@inheritDoc}
    *
@@ -86,6 +87,7 @@ final class StubReaderAdapter
     if (logger.isTraceEnabled())
       logger.trace("Detection has been stopped on reader {}", this.getName());
   }
+
   /**
    * {@inheritDoc}
    *
@@ -95,6 +97,7 @@ final class StubReaderAdapter
   public String getName() {
     return name;
   }
+
   /**
    * {@inheritDoc}
    *
@@ -104,6 +107,7 @@ final class StubReaderAdapter
   public boolean isProtocolSupported(String readerProtocol) {
     return true; // do not block any protocol
   }
+
   /**
    * {@inheritDoc}
    *
@@ -113,6 +117,7 @@ final class StubReaderAdapter
   public void activateProtocol(String readerProtocol) {
     activatedProtocols.add(readerProtocol);
   }
+
   /**
    * {@inheritDoc}
    *
@@ -122,6 +127,7 @@ final class StubReaderAdapter
   public void deactivateProtocol(String readerProtocol) {
     activatedProtocols.remove(readerProtocol);
   }
+
   /**
    * {@inheritDoc}
    *
@@ -135,6 +141,7 @@ final class StubReaderAdapter
       return false;
     }
   }
+
   /**
    * {@inheritDoc}
    *
@@ -146,6 +153,7 @@ final class StubReaderAdapter
       smartCard.openPhysicalChannel();
     }
   }
+
   /**
    * {@inheritDoc}
    *
@@ -157,6 +165,7 @@ final class StubReaderAdapter
       smartCard.closePhysicalChannel();
     }
   }
+
   /**
    * {@inheritDoc}
    *
@@ -166,6 +175,7 @@ final class StubReaderAdapter
   public boolean isPhysicalChannelOpen() {
     return smartCard != null && smartCard.isPhysicalChannelOpen();
   }
+
   /**
    * {@inheritDoc}
    *
@@ -175,6 +185,7 @@ final class StubReaderAdapter
   public boolean checkCardPresence() {
     return smartCard != null;
   }
+
   /**
    * {@inheritDoc}
    *
@@ -184,6 +195,7 @@ final class StubReaderAdapter
   public String getPowerOnData() {
     return HexUtil.toHex(smartCard.getPowerOnData());
   }
+
   /**
    * {@inheritDoc}
    *
@@ -196,6 +208,7 @@ final class StubReaderAdapter
     }
     return smartCard.processApdu(apduIn);
   }
+
   /**
    * {@inheritDoc}
    *
@@ -205,6 +218,7 @@ final class StubReaderAdapter
   public boolean isContactless() {
     return isContactLess;
   }
+
   /**
    * {@inheritDoc}
    *
@@ -244,6 +258,7 @@ final class StubReaderAdapter
 
     this.smartCard = smartCard;
   }
+
   /**
    * {@inheritDoc}
    *

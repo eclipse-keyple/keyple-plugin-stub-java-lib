@@ -190,7 +190,7 @@ public class StubSmartCard {
     private final Map<String, String> hexCommands;
 
     private Builder() {
-      hexCommands = new HashMap<String, String>();
+      hexCommands = new HashMap<>();
     }
 
     /**
@@ -251,6 +251,11 @@ public class StubSmartCard {
     }
   }
 
+  /**
+   * Provides a method for defining simulated power-on data for the StubSmartCard to build.
+   *
+   * @since 2.0.0
+   */
   public interface PowerOnDataStep {
     /**
      * Define simulated power-on data for the {@link StubSmartCard} to build
@@ -262,6 +267,11 @@ public class StubSmartCard {
     ProtocolStep withPowerOnData(byte[] powerOnData);
   }
 
+  /**
+   * Provides a method to define the simulated protocol for the StubSmartCard to build.
+   *
+   * @since 2.0.0
+   */
   public interface ProtocolStep {
     /**
      * Define simulated protocol for the {@link StubSmartCard} to build
@@ -273,6 +283,11 @@ public class StubSmartCard {
     CommandStep withProtocol(String protocol);
   }
 
+  /**
+   * CommandStep interface provides methods to build and configure a StubSmartCard object.
+   *
+   * @since 2.0.0
+   */
   public interface CommandStep {
     /**
      * Add simulated command/response to the {@link StubSmartCard} to build. Command and response
@@ -304,6 +319,11 @@ public class StubSmartCard {
     StubSmartCard build();
   }
 
+  /**
+   * Provides methods to add simulated commands and responses to a StubSmartCard builder.
+   *
+   * @since 2.1.0
+   */
   public interface SimulatedCommandStep {
     /**
      * Add simulated command/response to the {@link StubSmartCard} to build. Command and response
@@ -324,6 +344,11 @@ public class StubSmartCard {
     StubSmartCard build();
   }
 
+  /**
+   * Build step for creating a {@link StubSmartCard} instance.
+   *
+   * @since 2.1.0
+   */
   public interface BuildStep {
     /**
      * Build the {@link StubSmartCard}

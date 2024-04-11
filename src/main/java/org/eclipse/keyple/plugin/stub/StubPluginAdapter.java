@@ -47,12 +47,13 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
       int monitoringCycleDuration) {
     this.name = name;
     this.monitoringCycleDuration = monitoringCycleDuration;
-    this.stubReaders = new ConcurrentHashMap<String, StubReaderAdapter>();
+    this.stubReaders = new ConcurrentHashMap<>();
     for (StubReaderConfiguration configuration : readerConfigurations) {
       this.plugReader(
           configuration.getName(), configuration.getContactless(), configuration.getCard());
     }
   }
+
   /**
    * {@inheritDoc}
    *
@@ -62,6 +63,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   public int getMonitoringCycleDuration() {
     return monitoringCycleDuration;
   }
+
   /**
    * {@inheritDoc}
    *
@@ -69,8 +71,9 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    */
   @Override
   public Set<String> searchAvailableReaderNames() {
-    return new HashSet<String>(stubReaders.keySet());
+    return new HashSet<>(stubReaders.keySet());
   }
+
   /**
    * {@inheritDoc}
    *
@@ -80,6 +83,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   public ReaderSpi searchReader(String readerName) {
     return stubReaders.get(readerName);
   }
+
   /**
    * {@inheritDoc}
    *
@@ -89,6 +93,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   public String getName() {
     return name;
   }
+
   /**
    * {@inheritDoc}
    *
@@ -96,8 +101,9 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
    */
   @Override
   public Set<ReaderSpi> searchAvailableReaders() {
-    return new HashSet<ReaderSpi>(stubReaders.values());
+    return new HashSet<>(stubReaders.values());
   }
+
   /**
    * {@inheritDoc}
    *
@@ -107,6 +113,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
   public void onUnregister() {
     // NO-OP
   }
+
   /**
    * {@inheritDoc}
    *
@@ -117,6 +124,7 @@ class StubPluginAdapter implements StubPlugin, ObservablePluginSpi {
     Assert.getInstance().notNull(name, "reader name");
     stubReaders.put(name, new StubReaderAdapter(name, isContactless, card));
   }
+
   /**
    * {@inheritDoc}
    *
