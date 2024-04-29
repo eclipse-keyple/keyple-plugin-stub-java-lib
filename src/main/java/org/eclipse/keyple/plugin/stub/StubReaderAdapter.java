@@ -73,8 +73,7 @@ final class StubReaderAdapter
    */
   @Override
   public void onStartDetection() {
-    if (logger.isTraceEnabled())
-      logger.trace("Detection has been started on reader {}", this.getName());
+    logger.info("Reader [{}]: card detection started", getName());
   }
 
   /**
@@ -84,8 +83,7 @@ final class StubReaderAdapter
    */
   @Override
   public void onStopDetection() {
-    if (logger.isTraceEnabled())
-      logger.trace("Detection has been stopped on reader {}", this.getName());
+    logger.info("Reader [{}]: card detection stopped", getName());
   }
 
   /**
@@ -241,21 +239,20 @@ final class StubReaderAdapter
   public void insertCard(StubSmartCard smartCard) {
     Assert.getInstance().notNull(smartCard, "smart card");
     if (checkCardPresence()) {
-      logger.warn("You must remove the inserted card before inserted another one");
+      logger.warn(
+          "Reader [{}]: first remove the inserted card before inserting a new one", getName());
       return;
     }
-
     if (!activatedProtocols.contains(smartCard.getCardProtocol())) {
-      if (logger.isTraceEnabled()) {
-        logger.trace(
-            "Inserted card protocol {} does not match any activated protocol, please use activateProtocol() method",
-            smartCard.getCardProtocol());
-      }
+      logger.info(
+          "Reader [{}]: inserted card protocol [{}] does not match any activated protocol, please use activateProtocol() method first",
+          getName(),
+          smartCard.getCardProtocol());
       return;
     }
-
-    if (logger.isTraceEnabled()) logger.trace("Inserted card {}", smartCard);
-
+    if (logger.isTraceEnabled()) {
+      logger.trace("Reader [{}]: card inserted: {}", getName(), smartCard);
+    }
     this.smartCard = smartCard;
   }
 
@@ -267,7 +264,9 @@ final class StubReaderAdapter
   @Override
   public void removeCard() {
     if (smartCard != null) {
-      if (logger.isTraceEnabled()) logger.trace("Remove card {}", smartCard);
+      if (logger.isTraceEnabled()) {
+        logger.trace("Reader [{}]: card removed: {}", getName(), smartCard);
+      }
       closePhysicalChannel();
       this.smartCard = null;
     }
