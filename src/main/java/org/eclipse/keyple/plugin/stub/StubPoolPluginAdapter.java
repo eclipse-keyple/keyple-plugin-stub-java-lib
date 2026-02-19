@@ -109,7 +109,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
     }
 
     throw new PluginIOException(
-        "No reader is available in the groupReference : " + readerGroupReference);
+        "No reader is available for the given group reference: " + readerGroupReference);
   }
 
   /**
@@ -123,7 +123,7 @@ class StubPoolPluginAdapter implements StubPoolPlugin, PoolPluginSpi, Observable
 
     if (!(readerSpi instanceof StubReader)) {
       throw new IllegalArgumentException(
-          "Can not release reader, Reader should be of type StubReader");
+          "Cannot cast 'readerSpi' to StubReader. Actual type: " + readerSpi.getClass().getName());
     }
 
     allocatedReaders.remove(readerSpi.getName());
