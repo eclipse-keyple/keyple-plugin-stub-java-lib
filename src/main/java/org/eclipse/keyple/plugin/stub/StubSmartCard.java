@@ -143,7 +143,7 @@ public class StubSmartCard {
     }
 
     // throw a CardIOException if not found
-    throw new CardIOException("No response available for this request: " + hexApdu);
+    throw new CardIOException("No response is available for request: " + hexApdu);
   }
 
   /**

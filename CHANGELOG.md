@@ -6,9 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- Logging improvement.
-### Changed
+- Normalized logging and error messages using Keyple coding standards.
 - Migrated the CI pipeline from Jenkins to GitHub Actions.
+### Upgraded
+- `keyple-common-java-api` from `2.0.1` to `2.0.2` (source code not impacted)
+- `keyple-plugin-java-api` from `2.3.1` to `2.3.2` (source code not impacted)
+- `keyple-util-java-lib` from `2.4.0` to `2.4.1` (source code not impacted)
+- `slf4j-api` from `1.7.32` to `1.7.36` (`compileOnly`)
 
 ## [2.2.1] - 2024-04-12
 ### Changed
